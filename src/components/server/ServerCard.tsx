@@ -8,6 +8,7 @@ import { useServerStore } from "@store/useServer";
 import { ServerIcon } from "./ServerIcon";
 import { LotteryInfo } from "./LotteryInfo";
 import { ServerInfo } from "./ServerInfo";
+import { constants } from "@utils";
 
 export const ServerCard = () => {
 	const { serverCache } = useServerStore();
@@ -25,7 +26,7 @@ export const ServerCard = () => {
 
 	return (
 		<>
-			<Card className="mt-5" style={{ backgroundColor: "#2f3136" }}>
+			<Card className="mt-5" style={{ backgroundColor: constants.THEME.BLACK }}>
 				<CardContent>
 					<div className="pb-2">
 						<ServerIcon
@@ -33,11 +34,11 @@ export const ServerCard = () => {
 							server_id={server.server_id}
 							icon_hash={server.icon_hash}
 						/>
-						<div className="inline-flex text-2xl font-extrabold text-gray-400 font-content">
+						<div className="inline-flex text-2xl font-extrabold text-theme-gray font-content">
 							{server.name}
 						</div>
 					</div>
-					<Divider style={{ backgroundColor: "lightgray" }} className="max-w-[400px]" />
+					<Divider style={{ backgroundColor: constants.THEME.GRAY }} className="max-w-[400px]" />
 					<ServerInfo
 						member_count={server.users.length}
 						allowance_rate={server.settings.allowance_rate}

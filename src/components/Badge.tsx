@@ -1,25 +1,21 @@
 import React from "react";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
-import Avatar from "@mui/material/Avatar";
 
 interface IBadgeProps {
 	show: boolean
 	tooltip: string
-	icon: string
+	alt: string
+	children: React.ReactNode
 }
 
-export const Badge = ({ show, tooltip, icon }: IBadgeProps) => {
+export const Badge = ({ show, tooltip, children }: IBadgeProps) => {
 	if (!show) return null;
 	return (
 		<div className="inline-flex pb-2 align-middle">
 			<Tooltip title={tooltip}>
 				<IconButton>
-					<Avatar
-						sx={{ width: 20, height: 20 }}
-						alt={icon}
-						src={`/${icon}.png`}
-					/>
+					{ children }
 				</IconButton>
 			</Tooltip>
 		</div>

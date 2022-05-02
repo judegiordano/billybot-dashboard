@@ -1,16 +1,10 @@
 export const THEME = {
-	BLACK: "#2C2F33",
-	// DISCORD_BLACK: "#202225",
-	DARK_BLACK: "#23272A",
-	// DISCORD_GRAY: "#2f3136",
+	BLACK: "#2f3136",
+	DARK_BLACK: "#202225",
 	GRAY: "#99AAB5",
-	LIGHT_GRAY: "#F6F6F6",
-	// DISCORD_LIGHT_GRAY: "#9ca3af",
 	PURPLE: "#5865F2",
 	BLUE: "#3b82f6",
-	// GREEN: "#22c55e",
 	GREEN: "#57F287",
-	// YELLOW: "#eab308",
 	YELLOW: "#FEE75C",
 	RED: "#ef4444"
 };

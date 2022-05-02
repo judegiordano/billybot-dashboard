@@ -7,6 +7,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import type { IUser } from "@types";
 import { ScrollToSection } from "@components/ScrollToSection";
+import { constants } from "@utils";
 
 export const ServerInfo = ({
 	member_count,
@@ -18,20 +19,20 @@ export const ServerInfo = ({
 	mayor: IUser
 }) => {
 	return (
-		<div className="pt-2 text-gray-400 font-content">
-			<Accordion className="max-w-[400px]" style={{ backgroundColor: "#202225" }}>
-				<AccordionSummary expandIcon={<ExpandMoreIcon className="text-gray-400" />} >
-					<div className="font-bold text-gray-400 font-content">Server Information</div>
+		<div className="pt-2 text-theme-gray font-content">
+			<Accordion className="max-w-[400px]" style={{ backgroundColor: constants.THEME.DARK_BLACK }}>
+				<AccordionSummary expandIcon={<ExpandMoreIcon className="text-theme-gray" />} >
+					<div className="font-bold text-theme-gray font-content">Server Information</div>
 				</AccordionSummary>
 				<Divider style={{ backgroundColor: "lightgray" }} />
 				<AccordionDetails>
-					<div className="font-bold text-gray-400 font-content">
+					<div className="font-bold text-theme-gray font-content">
 						members: {member_count}
 					</div>
-					<div className="font-bold text-gray-400 font-content">
-						weekly allowance rate: <span className="text-green-500">{allowance_rate}</span>
+					<div className="font-bold text-theme-gray font-content">
+						weekly allowance rate: <span className="text-theme-green">{allowance_rate}</span>
 					</div>
-					<div className="font-bold text-gray-400 font-content">
+					<div className="font-bold text-theme-gray font-content">
 						current mayor: <ScrollToSection text={mayor.username} id={`${mayor.username}-${mayor.discriminator}`} />
 					</div>
 				</AccordionDetails>

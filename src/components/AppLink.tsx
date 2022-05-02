@@ -12,5 +12,5 @@ export const AppLink = ({
 	children,
 	target = "_top"
 }: IAppLinkProps): JSX.Element => {
-	return <Link href={href}><a target={target} className="text-blue-500">{children}</a></Link>;
+	return <Link href={href}><a target={target} className="text-theme-blue">{children}</a></Link>;
 };
