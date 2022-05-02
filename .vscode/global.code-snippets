@@ -1,0 +1,42 @@
+{
+	"React Functional Component (With Props)": {
+		"scope": "javascript,typescript,typescriptreact",
+		"description": "create a react functional component",
+		"prefix": "rtsx",
+		"body": [
+			"import React from \"react\";",
+			"",
+			"interface I${TM_FILENAME_BASE}Props {",
+			"",
+			"}",
+			"",
+			"export const ${TM_FILENAME_BASE}: React.FC<I${TM_FILENAME_BASE}Props> = ({",
+			"\t${0}",
+			"}: I${TM_FILENAME_BASE}Props): JSX.Element => {",
+			"\treturn (",
+			"\t\t<div>",
+			"\t\t\t",
+			"\t\t</div>",
+			"\t);",
+			"};",
+			""
+		]
+	},
+	"React Functional Component (Without Props)": {
+		"scope": "javascript,typescript,typescriptreact",
+		"description": "create a react functional component",
+		"prefix": "rtsx",
+		"body": [
+			"import React from \"react\";",
+			"",
+			"export const ${TM_FILENAME_BASE}: React.FC = (): JSX.Element => {",
+			"\treturn (",
+			"\t\t<div>",
+			"\t\t\t$0",
+			"\t\t</div>",
+			"\t);",
+			"};",
+			""
+		]
+	}
+}
