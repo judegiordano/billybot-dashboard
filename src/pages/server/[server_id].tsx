@@ -28,13 +28,17 @@ const Server = ({ server }: IServerProps) => {
 	}
 
 	return (
-		<div className="min-h-screen pt-5 pb-5 m-auto max-w-7xl">
-			<ServerCard />
-			{
-				metaData.users.map((user, key) => <UserCard key={key} user={user} index={key} />)
-			}
-			<ScrollToTop />
-		</div>
+		<>
+			<div className="bg-theme-dark-black">
+				<div className="max-w-[600px] min-h-screen pt-5 pb-5 m-auto">
+					<ServerCard />
+					{
+						metaData.users.map((user, key) => <UserCard key={key} user={user} index={key} />)
+					}
+					<ScrollToTop />
+				</div>
+			</div>
+		</>
 	);
 };
 

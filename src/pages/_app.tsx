@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: any) {
 					<meta name="author" content="Jude Giordano" />
 					<link rel="icon" href="/billy_mad.png" />
 				</Head>
-				<div className="font-content bg-theme-dark-black">
+				<div className="font-content">
 					<Component {...pageProps} />
 				</div>
 			</SWRConfig>
