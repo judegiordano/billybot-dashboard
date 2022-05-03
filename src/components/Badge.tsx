@@ -12,7 +12,7 @@ interface IBadgeProps {
 export const Badge = ({ show, tooltip, children }: IBadgeProps) => {
 	if (!show) return null;
 	return (
-		<div className="inline-flex pb-2 align-middle">
+		<div className="inline-flex pb-1 align-middle">
 			<Tooltip title={tooltip}>
 				<IconButton>
 					{ children }

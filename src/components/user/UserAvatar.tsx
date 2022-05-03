@@ -12,11 +12,11 @@ const buildAvatarUrl = (user: IUser) => {
 
 export const UserAvatar = ({ user }: { user: IUser }) => {
 	return (
-		<div className="inline-flex pr-2 align-middle">
+		<div className="inline-flex align-middle">
 			<Tooltip title={user.user_id}>
 				<IconButton>
 					<Avatar
-						sx={{ width: 56, height: 56 }}
+						sx={{ width: 50, height: 50 }}
 						alt={user.username}
 						src={buildAvatarUrl(user)}
 					/>

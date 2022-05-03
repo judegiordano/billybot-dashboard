@@ -2,15 +2,13 @@ import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Divider from "@mui/material/Divider";
-import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
-import VerifiedIcon from "@mui/icons-material/Verified";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
 import type { IUser } from "@types";
 import { constants, readableDate, readableTime } from "@utils";
 import { UserAvatar } from "./UserAvatar";
 import { Badge } from "@components/Badge";
 import { UserInfo } from "./UserInfo";
+import { AppIcon } from "@components/AppIcon";
 
 interface IUserCardProps {
 	user: IUser
@@ -19,9 +17,24 @@ interface IUserCardProps {
 
 export const UserCard = ({ user, index }: IUserCardProps) => {
 	const badges = [
-		{ show: user.is_admin, tooltip: `${user.username} is a bot administrator`, alt: "admin", icon: <VerifiedIcon style={{ color: constants.THEME.BLUE }} /> },
-		{ show: index < 3, tooltip: `${user.username} is a server noblemen`, alt: "noblemen", icon: <AttachMoneyIcon style={{ color: constants.THEME.GREEN }} /> },
-		{ show: user.has_lottery_ticket, tooltip: `${user.username} has purchased this weeks lottery ticket`, alt: "lottery_ticket", icon: <ConfirmationNumberIcon style={{ color: constants.THEME.RED }} /> }
+		{
+			show: user.is_admin,
+			tooltip: `${user.username} is a bot administrator`,
+			alt: "admin",
+			icon: <AppIcon type="verified" color={constants.THEME.BLUE}/>
+		},
+		{
+			show: index < 3,
+			tooltip: `${user.username} is a server noblemen`,
+			alt: "noblemen",
+			icon: <AppIcon type="money" color={constants.THEME.GREEN}/>
+		},
+		{
+			show: user.has_lottery_ticket,
+			tooltip: `${user.username} has purchased this weeks lottery ticket`,
+			alt: "lottery_ticket",
+			icon: <AppIcon type="ticket" color={constants.THEME.RED}/>
+		}
 	];
 	return (
 		<Card className="mt-5" id={`${user.username}-${user.discriminator}`} style={{ backgroundColor: constants.THEME.BLACK }}>

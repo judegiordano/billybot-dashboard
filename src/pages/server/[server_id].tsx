@@ -7,6 +7,7 @@ import { UserCard } from "@components/user/UserCard";
 import { ServerCard } from "@components/server/ServerCard";
 import { ScrollToTop } from "@components/ScrollToTop";
 import { getServerData } from "@rest";
+import { Loader } from "@components/Loader";
 
 interface IServerProps {
 	server: IServerMetadata
@@ -23,20 +24,20 @@ const Server = ({ server }: IServerProps) => {
 
 	if (!metaData) {
 		return (
-			<div>loading user info...</div>
+			<div className="min-h-screen pt-10 m-auto text-center">
+				<Loader />
+			</div>
 		);
 	}
 
 	return (
 		<>
-			<div className="bg-theme-dark-black">
-				<div className="max-w-[600px] min-h-screen pt-5 pb-5 m-auto">
-					<ServerCard />
-					{
-						metaData.users.map((user, key) => <UserCard key={key} user={user} index={key} />)
-					}
-					<ScrollToTop />
-				</div>
+			<div className="max-w-[600px] min-h-screen pt-5 pb-5 m-auto">
+				<ServerCard />
+				{
+					metaData.users.map((user, key) => <UserCard key={key} user={user} index={key} />)
+				}
+				<ScrollToTop />
 			</div>
 		</>
 	);

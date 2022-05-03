@@ -9,6 +9,7 @@ import { ServerIcon } from "./ServerIcon";
 import { LotteryInfo } from "./LotteryInfo";
 import { ServerInfo } from "./ServerInfo";
 import { constants } from "@utils";
+import { Loader } from "@components/Loader";
 
 export const ServerCard = () => {
 	const { serverCache } = useServerStore();
@@ -20,7 +21,9 @@ export const ServerCard = () => {
 
 	if (!server) {
 		return (
-			<div>loading server info...</div>
+			<div className="min-h-screen pt-10 m-auto text-center">
+				<Loader />
+			</div>
 		);
 	}
 
