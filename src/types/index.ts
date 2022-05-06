@@ -24,7 +24,6 @@ export interface IServer extends IModel {
 	server_id: string
 	name: string
 	icon_hash: string
-	mayor: IUser
 	settings: IServerSettings
 }
 
@@ -46,6 +45,7 @@ export interface IUser extends IModel {
 	last_allowance: string
 	has_lottery_ticket: boolean
 	is_admin: boolean
+	is_mayor: boolean
 	metrics: IUserMetrics
 }
 
@@ -53,7 +53,6 @@ export interface IWebhook extends IModel {
 	server_id: string
 	channel_name: string
 	webhook_id: string
-	webhook_token: string
 	avatar_url: string
 	username: string
 	notes?: string

@@ -45,7 +45,6 @@ export const ServerCard = () => {
 					<ServerInfo
 						member_count={server.users.length}
 						allowance_rate={server.settings.allowance_rate}
-						mayor={server.mayor}
 					/>
 					<LotteryInfo lottery={server.lottery} />
 				</CardContent>
