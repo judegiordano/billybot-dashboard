@@ -21,23 +21,27 @@ export const UserCard = ({ user, index }: IUserCardProps) => {
 			show: user.is_admin,
 			tooltip: `${user.username} is a bot administrator`,
 			alt: "admin",
-			icon: <AppIcon type="verified" color={constants.THEME.BLUE}/>
+			icon: <AppIcon type="verified" color={constants.THEME.BLUE} />
 		},
 		{
 			show: index < 3,
 			tooltip: `${user.username} is a server noblemen`,
 			alt: "noblemen",
-			icon: <AppIcon type="money" color={constants.THEME.GREEN}/>
+			icon: <AppIcon type="money" color={constants.THEME.GREEN} />
 		},
 		{
 			show: user.has_lottery_ticket,
 			tooltip: `${user.username} has purchased this weeks lottery ticket`,
 			alt: "lottery_ticket",
-			icon: <AppIcon type="ticket" color={constants.THEME.RED}/>
+			icon: <AppIcon type="ticket" color={constants.THEME.RED} />
 		}
 	];
 	return (
-		<Card className="mt-5" id={`${user.username}-${user.discriminator}`} style={{ backgroundColor: constants.THEME.BLACK }}>
+		<Card
+			className="mt-5"
+			id={`${user.username}-${user.discriminator}`}
+			style={{ backgroundColor: constants.THEME.BLACK }}
+		>
 			<CardContent>
 				<div>
 					<UserAvatar user={user} />

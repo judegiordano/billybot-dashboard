@@ -9,7 +9,7 @@ export type Ref<T extends IModel> = T["_id"]
 
 export interface IAnnouncement extends IModel {
 	server_id: string
-	user: Ref<IUser>
+	user: IUser
 	text: string
 	channel_name: string
 }
