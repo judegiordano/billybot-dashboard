@@ -15,6 +15,7 @@ import { useServer } from "@hooks/useServer";
 import { Error } from "@components/Error";
 import { AnnouncementSection } from "@components/announcement/AnnouncementSection";
 import { LotterySection } from "@components/lottery/LotterySection";
+import { constants } from "@utils";
 
 const Server = () => {
 	const [tabValue, setTabValue] = React.useState("1");
@@ -40,16 +41,16 @@ const Server = () => {
 	if (errorState) return <Error message={errorState} />;
 	if (isLoading || !metaData) return <Loader />;
 	return (
-		<div className="max-w-[700px] min-h-screen pt-5 pb-5 m-auto px-5">
+		<div className="max-w-[800px] min-h-screen pt-5 pb-5 m-auto px-5">
 			<ServerCard />
 			<div className="pt-[10px]">
 				<Box sx={{ width: "100%" }}>
 					<TabContext value={tabValue}>
-						<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-							<TabList onChange={toggleTab}>
-								<Tab className="text-theme-gray" label="Users" value="1" />
-								<Tab className="text-theme-gray" label="Announcements" value="2" />
-								<Tab className="text-theme-gray" label="Lottery" value="3" />
+						<Box sx={{ borderBottom: 1, borderColor: constants.THEME.BLACK }}>
+							<TabList onChange={toggleTab} >
+								<Tab style={{ color: constants.THEME.GRAY }} label="Users" value="1" />
+								<Tab style={{ color: constants.THEME.GRAY }} label="Announcements" value="2" />
+								<Tab style={{ color: constants.THEME.GRAY }} label="Lottery" value="3" />
 							</TabList>
 						</Box>
 						<TabPanel value="1">
