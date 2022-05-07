@@ -14,6 +14,7 @@ import { Loader } from "@components/Loader";
 import { useServer } from "@hooks/useServer";
 import { Error } from "@components/Error";
 import { AnnouncementSection } from "@components/announcement/AnnouncementSection";
+import { LotterySection } from "@components/lottery/LotterySection";
 
 const Server = () => {
 	const [tabValue, setTabValue] = React.useState("1");
@@ -48,6 +49,7 @@ const Server = () => {
 							<TabList onChange={toggleTab}>
 								<Tab className="text-theme-gray" label="Users" value="1" />
 								<Tab className="text-theme-gray" label="Announcements" value="2" />
+								<Tab className="text-theme-gray" label="Lottery" value="3" />
 							</TabList>
 						</Box>
 						<TabPanel value="1">
@@ -55,6 +57,9 @@ const Server = () => {
 						</TabPanel>
 						<TabPanel value="2">
 							<AnnouncementSection />
+						</TabPanel>
+						<TabPanel value="3">
+							<LotterySection />
 						</TabPanel>
 					</TabContext>
 				</Box>
