@@ -23,7 +23,7 @@ export const LotterySection = () => {
 	return (
 		<>
 			<Card
-				className="mt-5 font-medium"
+				className="mt-5 mb-5 font-medium"
 				style={{ backgroundColor: constants.THEME.BLACK }}>
 				<CardContent>
 					<div className="text-[20px] font-extrabold text-theme-gray">
@@ -34,7 +34,7 @@ export const LotterySection = () => {
 					</div>
 				</CardContent>
 			</Card>
-			<Divider className="mt-4 mb-2" style={{ backgroundColor: constants.THEME.GRAY }} />
+			<Divider style={{ backgroundColor: constants.THEME.GRAY }} />
 			{
 				lottery.entrants.map((user, key) => <ShallowUser key={key} user={user} />)
 			}
