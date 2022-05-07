@@ -21,6 +21,7 @@ export const Error: React.FC<IErrorProps> = ({
 					</div>
 					<div className="pt-10 rounded-full">
 						<Image
+							priority
 							draggable={false}
 							alt="billy mad"
 							className="rounded-full"
