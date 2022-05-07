@@ -12,7 +12,7 @@ export const Loader = ({
 }: ILoaderProps) => {
 	if(!visible) return null;
 	return (
-		<div className="px-2 py-3">
+		<div className="min-h-screen px-2 py-3 pt-10 m-auto text-center">
 			<CircularProgress size={size} />
 		</div>
 	);

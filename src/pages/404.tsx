@@ -4,8 +4,8 @@ import { AppLink } from "@components/AppLink";
 
 const NotFound: React.FC = (): JSX.Element => {
 	return (
-		<div className="m-auto text-center">
-			<div className="m-auto border-b-2 border-gray-200 max-w-[200px] pb-3">
+		<div className="min-h-screen m-auto text-center text-black">
+			<div className="m-auto border-b-2 border-theme-black max-w-[200px] pb-3">
 				<h1 className="font-medium text-8xl">
 					404
 				</h1>

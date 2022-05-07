@@ -1,38 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { GetServerSidePropsContext } from "next";
+import { useRouter } from "next/router";
 
 import type { IServerMetadata } from "@types";
-import { useServerStore } from "@store/useServer";
 import { UserCard } from "@components/user/UserCard";
 import { ServerCard } from "@components/server/ServerCard";
 import { ScrollToTop } from "@components/ScrollToTop";
-import { getServerData } from "@rest";
 import { Loader } from "@components/Loader";
+import { useServer } from "@hooks/useServer";
+import { Error } from "@components/Error";
 
-interface IServerProps {
-	server: IServerMetadata
-}
-
-const Server = ({ server }: IServerProps) => {
-	const { updateServerCache, serverCache } = useServerStore();
-	const [metaData, setMetaData] = useState<IServerMetadata>();
+const Server = () => {
+	const { query } = useRouter();
+	const { data, isLoading, error } = useServer(query.server_id as string);
+	const [metaData, setMetaData] = useState<IServerMetadata>({} as IServerMetadata);
+	const [errorState, setErrorState] = useState<string | undefined>();
 
 	useEffect(() => {
-		updateServerCache(server);
-		setMetaData(server);
-	}, [serverCache, server]);
+		if (!error) return setErrorState(undefined);
+		setErrorState(error.toString());
+		console.log({ error });
+	}, [error]);
 
-	if (!metaData) {
-		return (
-			<div className="min-h-screen pt-10 m-auto text-center">
-				<Loader />
-			</div>
-		);
-	}
+	useEffect(() => {
+		setMetaData(data);
+	}, [data]);
+
+	if (errorState) return <Error message={errorState} />;
+
+	if (isLoading || !metaData) return <Loader />;
 
 	return (
 		<>
-			<div className="max-w-[600px] min-h-screen pt-5 pb-5 m-auto">
+			<div className="max-w-[600px] min-h-screen pt-5 pb-5 m-auto px-5">
 				<ServerCard />
 				{
 					metaData.users.map((user, key) => <UserCard key={key} user={user} index={key} />)
@@ -44,29 +43,3 @@ const Server = ({ server }: IServerProps) => {
 };
 
 export default React.memo(Server);
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-	if (!context?.params?.server_id || typeof context?.params?.server_id !== "string") {
-		return {
-			redirect: {
-				permanent: false,
-				destination: "/bad-request"
-			}
-		};
-	}
-	const { server_id } = context.params;
-	const server = await getServerData(server_id);
-	if (server.ok === false && server.error) {
-		return {
-			redirect: {
-				permanent: false,
-				destination: "/resource-not-found"
-			}
-		};
-	}
-	return {
-		props: {
-			server
-		}
-	};
-}

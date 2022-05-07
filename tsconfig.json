@@ -35,6 +35,9 @@
       "@rest": [
         "src/rest"
       ],
+      "@hooks/*": [
+        "src/hooks/*"
+      ],
       "@components/*": [
         "src/components/*"
       ]
