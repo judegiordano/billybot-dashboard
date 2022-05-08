@@ -26,11 +26,17 @@ export const LotterySection = () => {
 				className="mt-5 mb-5 font-medium"
 				style={{ backgroundColor: constants.THEME.BLACK }}>
 				<CardContent>
-					<div className="text-[20px] font-extrabold text-theme-gray">
-						jackpot
-						<div className="inline-flex pl-1 text-theme-green">
-							+{lottery.jackpot}
-						</div>
+					<div className="font-bold text-[20px] text-theme-gray font-content">
+						lottery entrants: {lottery.entrants_count}
+					</div>
+					<div className="font-bold text-[20px] text-theme-gray font-content">
+						lottery ticket cost: <span className="text-theme-green">{lottery.ticket_cost}</span>
+					</div>
+					<div className="font-bold text-[20px] text-theme-gray font-content">
+						base lottery jackpot: <span className="text-theme-green">{lottery.base_lottery_jackpot}</span>
+					</div>
+					<div className="font-bold text-[20px] text-theme-gray font-content">
+						current lottery jackpot: <span className="text-theme-green">+{lottery.jackpot}</span>
 					</div>
 				</CardContent>
 			</Card>

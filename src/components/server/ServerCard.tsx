@@ -6,7 +6,6 @@ import Divider from "@mui/material/Divider";
 import type { IServerMetadata } from "@types";
 import { useServerStore } from "@store/useServer";
 import { ServerIcon } from "./ServerIcon";
-import { LotteryInfo } from "./LotteryInfo";
 import { ServerInfo } from "./ServerInfo";
 import { constants } from "@utils";
 import { Loader } from "@components/Loader";
@@ -46,7 +45,6 @@ export const ServerCard = () => {
 						member_count={server.users.length}
 						allowance_rate={server.settings.allowance_rate}
 					/>
-					<LotteryInfo lottery={server.lottery} />
 				</CardContent>
 			</Card>
 		</>

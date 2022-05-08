@@ -4,6 +4,8 @@ import CardContent from "@mui/material/CardContent";
 
 import type { IUser } from "@types";
 import { constants } from "@utils";
+import { Badge } from "@components/Badge";
+import { AppIcon } from "@components/AppIcon";
 
 interface IShallowUserProps {
 	user: Pick<IUser, "username">
@@ -20,6 +22,9 @@ export const ShallowUser: React.FC<IShallowUserProps> = ({
 			<CardContent>
 				<div className="text-[20px] font-extrabold text-theme-gray">
 					{user.username}
+					<Badge alt={"ticket"} show={true} tooltip={`${user.username} has purchased a lottery ticket`}>
+						<AppIcon type="ticket" color={constants.THEME.RED} />
+					</Badge>
 				</div>
 			</CardContent>
 		</Card>

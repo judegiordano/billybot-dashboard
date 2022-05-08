@@ -9,6 +9,7 @@ import { UserAvatar } from "./UserAvatar";
 import { Badge } from "@components/Badge";
 import { UserInfo } from "./UserInfo";
 import { AppIcon } from "@components/AppIcon";
+import { UserGamblingDropdown } from "./UserGamblingDropdown";
 
 interface IUserCardProps {
 	user: IUser
@@ -53,6 +54,7 @@ export const UserCard = ({ user, index }: IUserCardProps) => {
 					)
 				}
 				<Divider style={{ backgroundColor: constants.THEME.GRAY }} className="max-w-[400px]" />
+				<UserGamblingDropdown metrics={user.metrics} />
 				<div className="pt-2 font-medium text-theme-gray font-content">
 					<div>
 						last allowance: {readableDate(user.last_allowance)}: {readableTime(user.last_allowance)}
