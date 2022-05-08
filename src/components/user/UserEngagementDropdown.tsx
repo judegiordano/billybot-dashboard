@@ -1,0 +1,40 @@
+import React from "react";
+import Divider from "@mui/material/Divider";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
+import { IUserMetrics } from "@types";
+import { constants } from "@utils";
+
+interface IUserEngagementDropdownProps {
+	metrics: Pick<IUserMetrics, "engagement">
+}
+
+export const UserEngagementDropdown: React.FC<IUserEngagementDropdownProps> = ({
+	metrics
+}: IUserEngagementDropdownProps): JSX.Element => {
+	const { engagement } = metrics;
+	return (
+		<div className="pt-2 text-theme-gray">
+			<Accordion className="max-w-[400px]" style={{ backgroundColor: constants.THEME.DARK_BLACK }}>
+				<AccordionSummary expandIcon={<ExpandMoreIcon className="text-theme-gray" />} >
+					<div className="text-sm font-bold text-theme-gray">Engagement Metrics</div>
+				</AccordionSummary>
+				<Divider style={{ backgroundColor: constants.THEME.GRAY }} />
+				<AccordionDetails>
+					{
+						Object.keys(engagement).map((key, index) => (
+							<div key={index} className="text-sm font-bold text-theme-gray">
+								{key.replace(/_/gmi, " ")}: <span className="text-theme-green">
+									{engagement[key as keyof typeof engagement]}
+								</span>
+							</div>
+						))
+					}
+				</AccordionDetails>
+			</Accordion>
+		</div>
+	);
+};

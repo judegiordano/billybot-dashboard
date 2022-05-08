@@ -10,6 +10,7 @@ import { Badge } from "@components/Badge";
 import { UserInfo } from "./UserInfo";
 import { AppIcon } from "@components/AppIcon";
 import { UserGamblingDropdown } from "./UserGamblingDropdown";
+import { UserEngagementDropdown } from "./UserEngagementDropdown";
 
 interface IUserCardProps {
 	user: IUser
@@ -54,6 +55,7 @@ export const UserCard = ({ user, index }: IUserCardProps) => {
 					)
 				}
 				<Divider style={{ backgroundColor: constants.THEME.GRAY }} className="max-w-[400px]" />
+				<UserEngagementDropdown metrics={user.metrics} />
 				<UserGamblingDropdown metrics={user.metrics} />
 				<div className="pt-2 font-medium text-theme-gray font-content">
 					<div>
