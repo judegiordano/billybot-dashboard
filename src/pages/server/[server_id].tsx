@@ -60,15 +60,17 @@ const Server = () => {
 						</Box>
 						<TabPanel value="1">
 							<UserSection />
-							<Pagination
-								color="primary"
-								showFirstButton
-								showLastButton
-								className="flex justify-center pt-5 pb-5"
-								count={metaData.user_pages}
-								page={page}
-								onChange={handleChange}
-							/>
+							<div className="mt-5 bg-theme-black">
+								<Pagination
+									color="primary"
+									showFirstButton
+									showLastButton
+									className="flex justify-center pt-5 pb-5"
+									count={metaData.user_pages}
+									page={page}
+									onChange={handleChange}
+								/>
+							</div>
 						</TabPanel>
 						<TabPanel value="2">
 							<AnnouncementSection />

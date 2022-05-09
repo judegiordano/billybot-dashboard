@@ -20,3 +20,17 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   /* background: black; */
 }
+
+/* override mui pagination color */
+.MuiPagination-ul li * {
+	color: #99AAB5
+}
+.css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+	background-color: #5865F2
+}
+.css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover {
+	background-color: #5865F2
+}
+.css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root:hover {
+	background-color: #202225
+}
