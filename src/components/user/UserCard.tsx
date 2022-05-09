@@ -55,9 +55,12 @@ export const UserCard = ({ user, index }: IUserCardProps) => {
 					)
 				}
 				<Divider style={{ backgroundColor: constants.THEME.GRAY }} className="max-w-[400px]" />
-				<UserEngagementDropdown metrics={user.metrics} />
-				<UserGamblingDropdown metrics={user.metrics} />
-				<div className="pt-2 font-medium text-theme-gray font-content">
+				<UserEngagementDropdown engagement={user.metrics.engagement} />
+				<UserGamblingDropdown gambling={user.metrics.gambling} />
+				<div className="mt-2">
+					<Divider style={{ backgroundColor: constants.THEME.GRAY }} className="max-w-[400px]" />
+				</div>
+				<div className="pt-2 text-sm font-medium text-theme-gray font-content">
 					<div>
 						last allowance: {readableDate(user.last_allowance)}: {readableTime(user.last_allowance)}
 					</div>

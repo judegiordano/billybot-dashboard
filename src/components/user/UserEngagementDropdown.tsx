@@ -5,17 +5,16 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-import { IUserMetrics } from "@types";
+import { IEngagementMetrics } from "@types";
 import { constants } from "@utils";
 
 interface IUserEngagementDropdownProps {
-	metrics: Pick<IUserMetrics, "engagement">
+	engagement: IEngagementMetrics
 }
 
 export const UserEngagementDropdown: React.FC<IUserEngagementDropdownProps> = ({
-	metrics
+	engagement
 }: IUserEngagementDropdownProps): JSX.Element => {
-	const { engagement } = metrics;
 	return (
 		<div className="pt-2 text-theme-gray">
 			<Accordion className="max-w-[400px]" style={{ backgroundColor: constants.THEME.DARK_BLACK }}>
