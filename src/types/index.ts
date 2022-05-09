@@ -25,6 +25,7 @@ export interface IServer extends IModel {
 	name: string
 	icon_hash: string
 	settings: IServerSettings
+	user_count: number
 }
 
 export interface IEngagementMetrics {

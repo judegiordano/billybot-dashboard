@@ -1,26 +1,44 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import Pagination from "@mui/material/Pagination";
 
-import type { IUser } from "@types";
 import { UserCard } from "@components/user/UserCard";
 import { Loader } from "@components/Loader";
-import { useServerStore } from "@store/useServer";
 import { EmptyDataState } from "@components/EmptyDataState";
+import { useUsers } from "@hooks/useUsers";
+import type { UserPagination } from "@store/useUsers";
 
 export const UserSection = () => {
-	const { serverCache } = useServerStore();
-	const [users, setUsers] = useState<IUser[] | undefined>();
+	const { query } = useRouter();
+	const [page, setPage] = useState(1);
+	const { data } = useUsers(`${query.server_id}?page=${page}`);
+	const [pagination, setPagination] = useState<UserPagination | undefined>();
+	const handleChange = (_: unknown, value: number) => {
+		setPage(value);
+	};
 
 	useEffect(() => {
-		serverCache && setUsers(serverCache.users);
-	}, [serverCache]);
+		data && setPagination(data);
+	}, [data]);
 
-	if (!users) return <Loader />;
-	if (users.length <= 0) return <EmptyDataState text="no users" />;
+	if (!pagination) return <Loader />;
+	if (pagination.users.length <= 0) return <EmptyDataState text="no users" />;
 	return (
 		<>
 			{
-				users.map((user, key) => <UserCard key={key} user={user} index={key} />)
+				pagination.users.map((user, key) => <UserCard key={key} user={user} index={key} />)
 			}
+			<div className="mt-5 bg-theme-black">
+				<Pagination
+					color="primary"
+					showFirstButton
+					showLastButton
+					className="flex justify-center pt-5 pb-5"
+					count={pagination.pages}
+					page={page}
+					onChange={handleChange}
+				/>
+			</div>
 		</>
 	);
 };

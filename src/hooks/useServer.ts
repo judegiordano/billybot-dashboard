@@ -1,27 +1,19 @@
 import { useSWRConfig } from "swr";
 
-import { useServerStore } from "@store/useServer";
-import { IServerMetadata } from "@types";
+import type { IServer } from "@types";
 import { useApi } from "./useApi";
+import { useServerInfoStore } from "@store/useServerInfo";
 
 export function useServer(key: string) {
 	const { mutate } = useSWRConfig();
-	const { serverCache, updateServerCache } = useServerStore();
-	const { data, isLoading, error } = useApi<IServerMetadata>(`server/${key}`, {
+	const { serverInfoCache, updateServerInfoCache } = useServerInfoStore();
+	const { data, isLoading, error } = useApi<IServer>(`server/information/${key}`, {
 		refreshInterval: 10000,
-		// onError: (error, key) => {
-		// 	console.log(error);
-		// 	toast.error(error.toString());
-		// 	if (serverCache._id) {
-		// 		return mutate(key, serverCache, false);
-		// 	}
-		// 	throw new Error(error.toString());
-		// },
-		onSuccess: (data) => updateServerCache(data)
+		onSuccess: (data) => updateServerInfoCache(data)
 	});
 	return {
 		data,
-		serverCache,
+		serverInfoCache,
 		isLoading,
 		mutate,
 		error

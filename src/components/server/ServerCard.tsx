@@ -3,20 +3,20 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Divider from "@mui/material/Divider";
 
-import type { IServerMetadata } from "@types";
-import { useServerStore } from "@store/useServer";
+import type { IServer } from "@types";
 import { ServerIcon } from "./ServerIcon";
 import { ServerInfo } from "./ServerInfo";
 import { constants } from "@utils";
 import { Loader } from "@components/Loader";
+import { useServerInfoStore } from "@store/useServerInfo";
 
 export const ServerCard = () => {
-	const { serverCache } = useServerStore();
-	const [server, setServer] = useState<IServerMetadata>();
+	const { serverInfoCache } = useServerInfoStore();
+	const [server, setServer] = useState<IServer>();
 
 	useEffect(() => {
-		setServer(serverCache);
-	}, [serverCache]);
+		serverInfoCache && setServer(serverInfoCache);
+	}, [serverInfoCache]);
 
 	if (!server) {
 		return (

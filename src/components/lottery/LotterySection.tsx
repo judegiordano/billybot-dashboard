@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Divider from "@mui/material/Divider";
 
-import { useServerStore } from "@store/useServer";
 import type { ILotteryInfo } from "@types";
 import { Loader } from "@components/Loader";
 import { EmptyDataState } from "@components/EmptyDataState";
 import { ShallowUser } from "./ShallowUser";
 import { constants } from "@utils";
+import { useLottery } from "@hooks/useLottery";
 
 export const LotterySection = () => {
-	const { serverCache } = useServerStore();
+	const { query } = useRouter();
+	const { data } = useLottery(query.server_id as string);
 	const [lottery, setLottery] = useState<ILotteryInfo | undefined>();
 
 	useEffect(() => {
-		serverCache && setLottery(serverCache.lottery);
-	}, [serverCache]);
+		data && setLottery(data);
+	}, [data]);
 
 	if (!lottery) return <Loader />;
 	if (lottery.entrants.length <= 0) return <EmptyDataState text="no entrants yet" />;

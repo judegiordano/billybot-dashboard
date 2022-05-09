@@ -20,5 +20,8 @@
 	"eslint.validate": [
 		"javascript",
 		"typescript",
+	],
+	"cSpell.words": [
+		"boytown"
 	]
 }
