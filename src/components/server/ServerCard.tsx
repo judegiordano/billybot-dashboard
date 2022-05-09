@@ -42,7 +42,7 @@ export const ServerCard = () => {
 					</div>
 					<Divider style={{ backgroundColor: constants.THEME.GRAY }} className="max-w-[400px]" />
 					<ServerInfo
-						member_count={server.users.length}
+						member_count={server.user_count}
 						allowance_rate={server.settings.allowance_rate}
 					/>
 				</CardContent>

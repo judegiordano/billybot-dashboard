@@ -4,10 +4,10 @@ import { useServerStore } from "@store/useServer";
 import { IServerMetadata } from "@types";
 import { useApi } from "./useApi";
 
-export function useServer(id: string) {
+export function useServer(key: string) {
 	const { mutate } = useSWRConfig();
 	const { serverCache, updateServerCache } = useServerStore();
-	const { data, isLoading, error } = useApi<IServerMetadata>(`server/${id}`, {
+	const { data, isLoading, error } = useApi<IServerMetadata>(`server/${key}`, {
 		refreshInterval: 10000,
 		// onError: (error, key) => {
 		// 	console.log(error);

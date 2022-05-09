@@ -93,6 +93,8 @@ export interface IApiError {
 export type UserLookup = Record<string, IUser>
 
 export interface IServerMetadata extends IServer {
+	user_count: number
+	user_pages: number
 	users: IUser[]
 	announcements: IAnnouncement[]
 	webhooks: IWebhook[]
