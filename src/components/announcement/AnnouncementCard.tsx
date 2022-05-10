@@ -51,7 +51,7 @@ export const AnnouncementCard: React.FC<IAnnouncementCardProps> = ({
 			style={{ backgroundColor: constants.THEME.BLACK }}
 		>
 			<CardContent>
-				<div className="p-2 rounded-md bg-theme-dark-black text-theme-gray">
+				<div className="p-2 overflow-scroll rounded-md bg-theme-dark-black text-theme-gray">
 					{announcement.text}
 				</div>
 				<Divider className="mt-2 mb-2" style={{ backgroundColor: constants.THEME.GRAY }} />

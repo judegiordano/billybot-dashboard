@@ -3,10 +3,12 @@ import Divider from "@mui/material/Divider";
 
 export const ServerInfo = ({
 	member_count,
-	allowance_rate
+	allowance_rate,
+	birthday_bucks
 }: {
 	member_count: number
 	allowance_rate: number
+	birthday_bucks: number
 }) => {
 	return (
 		<div className="pt-2 text-theme-gray font-content">
@@ -18,6 +20,9 @@ export const ServerInfo = ({
 				</div>
 				<div className="font-bold text-theme-gray font-content">
 					weekly allowance rate: <span className="text-theme-green">{allowance_rate}</span>
+				</div>
+				<div className="font-bold text-theme-gray font-content">
+					birthday bonus: <span className="text-theme-green">{birthday_bucks}</span>
 				</div>
 			</div>
 		</div>

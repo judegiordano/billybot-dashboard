@@ -10,7 +10,7 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #202225
+  background: #202225;
 }
 ::-webkit-scrollbar-thumb {
   /* background: black; */
@@ -23,14 +23,36 @@ body {
 
 /* override mui pagination color */
 .MuiPagination-ul li * {
-	color: #99AAB5
+	color: #99AAB5;
 }
 .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
-	background-color: #5865F2
+	background-color: #5865F2;
 }
 .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover {
-	background-color: #5865F2
+	background-color: #5865F2;
 }
 .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root:hover {
-	background-color: #202225
+	background-color: #202225;
+}
+
+
+/* override mui text field */
+.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
+	color: #99AAB5;
+}
+.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root {
+	color: #99AAB5;
+}
+.MuiOutlinedInput-root .MuiOutlinedInput-input {
+	color: #99AAB5;
+}
+/* filled variant */
+.css-o943dk-MuiFormLabel-root-MuiInputLabel-root {
+	color: #99AAB5;
+}
+.css-e4w4as-MuiFormLabel-root-MuiInputLabel-root {
+	color: #99AAB5;
+}
+.css-19mk8g1-MuiInputBase-root-MuiFilledInput-root {
+	color: #99AAB5;
 }

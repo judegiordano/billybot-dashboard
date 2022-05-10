@@ -18,6 +18,7 @@ export interface IServerSettings {
 	lottery_cost: number
 	base_lottery_jackpot: number
 	allowance_rate: number
+	birthday_bucks: number
 }
 
 export interface IServer extends IModel {
@@ -66,10 +67,12 @@ export interface IUser extends IModel {
 	is_admin: boolean
 	is_mayor: boolean
 	metrics: IUserMetrics
+	birthday: string
 }
 
 export interface IWebhook extends IModel {
 	server_id: string
+	server: string | IServer
 	channel_name: string
 	webhook_id: string
 	avatar_url: string

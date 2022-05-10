@@ -44,6 +44,7 @@ export const ServerCard = () => {
 					<ServerInfo
 						member_count={server.user_count}
 						allowance_rate={server.settings.allowance_rate}
+						birthday_bucks={server.settings.birthday_bucks}
 					/>
 				</CardContent>
 			</Card>
