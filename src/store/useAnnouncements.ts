@@ -5,18 +5,23 @@ import { persist } from "zustand/middleware";
 import { storageEngine } from "./engine";
 import type { IAnnouncement } from "@types";
 
+export type AnnouncementPagination = {
+	pages: number,
+	announcements: IAnnouncement[]
+}
+
 type UseAnnouncements = {
-	announcementsCache: IAnnouncement[]
-	updateAnnouncementsCache: (a: IAnnouncement[]) => void
+	announcementsCache: AnnouncementPagination
+	updateAnnouncementsCache: (a: AnnouncementPagination) => void
 	clearAnnouncementCache: () => void
 }
 
 export const useAnnouncementsStore = create<UseAnnouncements>(
 	persist(
 		(set, get) => ({
-			announcementsCache: [],
-			updateAnnouncementsCache: (announcementsCache: IAnnouncement[]) => set({ announcementsCache }),
-			clearAnnouncementCache: () => set({ announcementsCache: [] })
+			announcementsCache: { pages: 0, announcements: [] },
+			updateAnnouncementsCache: (announcementsCache: AnnouncementPagination) => set({ announcementsCache }),
+			clearAnnouncementCache: () => set({ announcementsCache: { pages: 0, announcements: [] } })
 		}),
 		{
 			name: "boytown-dashboard.announcements",

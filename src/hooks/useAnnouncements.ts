@@ -1,13 +1,12 @@
 import { useSWRConfig } from "swr";
 
 import { useApi } from "./useApi";
-import type { IAnnouncement } from "@types";
-import { useAnnouncementsStore } from "@store/useAnnouncements";
+import { AnnouncementPagination, useAnnouncementsStore } from "@store/useAnnouncements";
 
 export function useAnnouncements(key: string) {
 	const { mutate } = useSWRConfig();
 	const { announcementsCache, updateAnnouncementsCache } = useAnnouncementsStore();
-	const { data, isLoading, error } = useApi<IAnnouncement[]>(`announcements/server/${key}`, {
+	const { data, isLoading, error } = useApi<AnnouncementPagination>(`announcements/server/${key}`, {
 		refreshInterval: 10000,
 		onSuccess: (data) => updateAnnouncementsCache(data)
 	});
