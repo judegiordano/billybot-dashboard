@@ -1,5 +1,4 @@
 import React from "react";
-import Divider from "@mui/material/Divider";
 
 export const ServerInfo = ({
 	member_count,
@@ -13,8 +12,6 @@ export const ServerInfo = ({
 	return (
 		<div className="pt-2 text-theme-gray font-content">
 			<div className="bg-theme-dark-black max-w-[400px] p-5">
-				<div className="font-bold text-theme-gray font-content">Server Information</div>
-				<Divider style={{ backgroundColor: "lightgray" }} />
 				<div className="font-bold text-theme-gray font-content">
 					members: {member_count}
 				</div>

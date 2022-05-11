@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Pagination from "@mui/material/Pagination";
 import TextField from "@mui/material/TextField";
+import Checkbox from "@mui/material/Checkbox";
 
 import { UserCard } from "@components/user/UserCard";
 import { Loader } from "@components/Loader";
@@ -13,17 +14,25 @@ export const UserSection = () => {
 	const { query } = useRouter();
 	const [page, setPage] = useState(1);
 	const [username, setUsername] = useState("");
-	const { data } = useUsers(`${query.server_id}?page=${page}&username=${username}`);
-	const [pagination, setPagination] = useState<UserPagination | undefined>();
-	const handleChange = (_: unknown, value: number) => {
-		setPage(value);
-	};
+	const [isMayor, setIsMayor] = useState<boolean | null>(null);
+	const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+	const [bucks, setBucks] = useState<number>(-1);
+	const key = `${query.server_id}?page=${page}&username=${username}&is_mayor=${isMayor}&is_admin=${isAdmin}&billy_bucks=${bucks}`;
+	const { data } = useUsers(key);
+	const [paginatedUsers, setPaginatedUsers] = useState<UserPagination | undefined>();
+
+	const changePage = (_: unknown, value: number) => setPage(value);
+	const filteringComponents = [
+		{ text: "mayor", method: () => isMayor === true ? setIsMayor(null) : setIsMayor(true) },
+		{ text: "bot admins", method: () => isAdmin === true ? setIsAdmin(null) : setIsAdmin(true) },
+		{ text: "sort bucks", method: () => bucks === -1 ? setBucks(1) : setBucks(-1) },
+	];
 
 	useEffect(() => {
-		data && setPagination(data);
+		data && setPaginatedUsers(data);
 	}, [data]);
 
-	if (!pagination) return <Loader />;
+	if (!paginatedUsers) return <Loader />;
 	return (
 		<>
 			<TextField
@@ -36,13 +45,28 @@ export const UserSection = () => {
 					setUsername(e.target.value);
 				}}
 			/>
+			<div>
+				{
+					filteringComponents.map((component, key) => (
+						<div key={key} className="inline-flex items-center pl-2 text-theme-gray">
+							<div>
+								{component.text}
+							</div>
+							<Checkbox onChange={() => {
+								setPage(1);
+								{ component.method(); }
+							}} />
+						</div>
+					))
+				}
+			</div>
 			{
-				pagination.users.length <= 0 && (
+				paginatedUsers.users.length <= 0 && (
 					<EmptyDataState text="no users" />
 				)
 			}
 			{
-				pagination.users.map((user, key) => <UserCard key={key} user={user} index={key} />)
+				paginatedUsers.users.map((user, key) => <UserCard key={key} user={user} index={key} />)
 			}
 			<div className="mt-5 bg-theme-black">
 				<Pagination
@@ -50,9 +74,9 @@ export const UserSection = () => {
 					showFirstButton
 					showLastButton
 					className="flex justify-center pt-5 pb-5"
-					count={pagination.pages}
+					count={paginatedUsers.pages}
 					page={page}
-					onChange={handleChange}
+					onChange={changePage}
 				/>
 			</div>
 		</>
