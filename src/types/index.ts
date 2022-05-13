@@ -62,7 +62,7 @@ export interface IUser extends IModel {
 	username: string
 	discriminator: string
 	avatar_hash?: string
-	last_allowance: string
+	allowance_available: boolean
 	has_lottery_ticket: boolean
 	is_admin: boolean
 	is_mayor: boolean

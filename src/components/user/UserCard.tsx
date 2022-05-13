@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import Divider from "@mui/material/Divider";
 
 import type { IUser } from "@types";
-import { constants, readableDate, readableTime } from "@utils";
+import { constants } from "@utils";
 import { UserAvatar } from "./UserAvatar";
 import { Badge } from "@components/Badge";
 import { UserInfo } from "./UserInfo";
@@ -38,6 +38,7 @@ export const UserCard = ({ user, index }: IUserCardProps) => {
 			icon: <AppIcon type="ticket" color={constants.THEME.RED} />
 		}
 	];
+	console.log({user});
 	return (
 		<Card
 			className="mt-5"
@@ -62,7 +63,7 @@ export const UserCard = ({ user, index }: IUserCardProps) => {
 				</div>
 				<div className="pt-2 text-sm font-medium text-theme-gray font-content">
 					<div>
-						last allowance: {readableDate(user.last_allowance)}: {readableTime(user.last_allowance)}
+						allowance available: {user.allowance_available.toString()}
 					</div>
 				</div>
 			</CardContent>
