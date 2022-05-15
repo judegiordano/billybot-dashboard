@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Divider from "@mui/material/Divider";
 
 import type { IServer } from "@types";
 import { ServerIcon } from "./ServerIcon";
@@ -9,6 +8,7 @@ import { ServerInfo } from "./ServerInfo";
 import { constants } from "@utils";
 import { Loader } from "@components/Loader";
 import { useServerInfoStore } from "@store/useServerInfo";
+import { Separator } from "@components/Separator";
 
 export const ServerCard = () => {
 	const { serverInfoCache } = useServerInfoStore();
@@ -40,12 +40,14 @@ export const ServerCard = () => {
 							{server.name}
 						</div>
 					</div>
-					<Divider style={{ backgroundColor: constants.THEME.GRAY }} className="max-w-[400px]" />
-					<ServerInfo
-						member_count={server.user_count}
-						allowance_rate={server.settings.allowance_rate}
-						birthday_bucks={server.settings.birthday_bucks}
-					/>
+					<div className="max-w-[400px]">
+						<Separator />
+						<ServerInfo
+							member_count={server.user_count}
+							allowance_rate={server.settings.allowance_rate}
+							birthday_bucks={server.settings.birthday_bucks}
+						/>
+					</div>
 				</CardContent>
 			</Card>
 		</>

@@ -1,10 +1,10 @@
 import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Divider from "@mui/material/Divider";
 
 import type { IAnnouncement } from "@types";
 import { constants, readableDate, readableTime } from "@utils";
+import { Separator } from "@components/Separator";
 
 interface IAnnouncementCardProps {
 	announcement: IAnnouncement
@@ -54,7 +54,7 @@ export const AnnouncementCard: React.FC<IAnnouncementCardProps> = ({
 				<div className="p-2 overflow-scroll rounded-md bg-theme-dark-black text-theme-gray">
 					{announcement.text}
 				</div>
-				<Divider className="mt-2 mb-2" style={{ backgroundColor: constants.THEME.GRAY }} />
+				<Separator />
 				<PosterInfo announcement={announcement} />
 				<Timestamp date={announcement.created_at} />
 			</CardContent>

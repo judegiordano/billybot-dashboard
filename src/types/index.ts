@@ -7,6 +7,18 @@ export interface IModel {
 
 export type Ref<T extends IModel> = T["_id"]
 
+export enum CardSuit {
+	clubs = "clubs",
+	hearts = "hearts",
+	spades = "spades",
+	diamonds = "diamonds",
+}
+
+export interface ICard {
+	suit: CardSuit
+	value: number
+}
+
 export interface IAnnouncement extends IModel {
 	server_id: string
 	user: IUser
@@ -47,6 +59,18 @@ export interface IGamblingMetrics {
 		losses: number
 		overall_winnings: number
 		overall_losings: number
+	}
+	blackjack: {
+		games: number
+		wins: number
+		losses: number
+		double_downs: number
+		overall_winnings: number
+		overall_losings: number
+		last_hand?: {
+			won: boolean
+			hand: ICard[]
+		}
 	}
 }
 

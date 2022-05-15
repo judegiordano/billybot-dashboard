@@ -1,5 +1,4 @@
 import React from "react";
-import Divider from "@mui/material/Divider";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -7,6 +6,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import { IEngagementMetrics } from "@types";
 import { constants } from "@utils";
+import { Separator } from "@components/Separator";
 
 interface IUserEngagementDropdownProps {
 	engagement: IEngagementMetrics
@@ -21,7 +21,7 @@ export const UserEngagementDropdown: React.FC<IUserEngagementDropdownProps> = ({
 				<AccordionSummary expandIcon={<ExpandMoreIcon className="text-theme-gray" />} >
 					<div className="text-sm font-bold text-theme-gray">Engagement Metrics</div>
 				</AccordionSummary>
-				<Divider style={{ backgroundColor: constants.THEME.GRAY }} />
+				<Separator />
 				<AccordionDetails>
 					{
 						Object.keys(engagement).map((key, index) => (

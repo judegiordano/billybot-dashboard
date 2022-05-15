@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Divider from "@mui/material/Divider";
 
 import type { IUser } from "@types";
 import { constants } from "@utils";
@@ -11,6 +10,7 @@ import { UserInfo } from "./UserInfo";
 import { AppIcon } from "@components/AppIcon";
 import { UserGamblingDropdown } from "./UserGamblingDropdown";
 import { UserEngagementDropdown } from "./UserEngagementDropdown";
+import { Separator } from "@components/Separator";
 
 interface IUserCardProps {
 	user: IUser
@@ -38,7 +38,6 @@ export const UserCard = ({ user, index }: IUserCardProps) => {
 			icon: <AppIcon type="ticket" color={constants.THEME.RED} />
 		}
 	];
-	console.log({user});
 	return (
 		<Card
 			className="mt-5"
@@ -55,15 +54,15 @@ export const UserCard = ({ user, index }: IUserCardProps) => {
 						<Badge key={key} alt={data.alt} show={data.show} tooltip={data.tooltip}>{data.icon}</Badge>
 					)
 				}
-				<Divider style={{ backgroundColor: constants.THEME.GRAY }} className="max-w-[400px]" />
-				<UserEngagementDropdown engagement={user.metrics.engagement} />
-				<UserGamblingDropdown gambling={user.metrics.gambling} />
-				<div className="mt-2">
-					<Divider style={{ backgroundColor: constants.THEME.GRAY }} className="max-w-[400px]" />
-				</div>
-				<div className="pt-2 text-sm font-medium text-theme-gray font-content">
-					<div>
-						allowance available: {user.allowance_available.toString()}
+				<div className="max-w-[400px]">
+					<Separator />
+					<UserEngagementDropdown engagement={user.metrics.engagement} />
+					<UserGamblingDropdown gambling={user.metrics.gambling} />
+					<Separator />
+					<div className="pt-2 text-sm font-medium text-theme-gray font-content">
+						<div>
+							allowance available: <span className={`text-theme-${user.allowance_available ? "green" : "red"}`}>{user.allowance_available.toString()}</span>
+						</div>
 					</div>
 				</div>
 			</CardContent>

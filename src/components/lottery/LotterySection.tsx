@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Divider from "@mui/material/Divider";
 
 import type { ILotteryInfo } from "@types";
 import { Loader } from "@components/Loader";
@@ -10,6 +9,7 @@ import { EmptyDataState } from "@components/EmptyDataState";
 import { ShallowUser } from "./ShallowUser";
 import { constants } from "@utils";
 import { useLottery } from "@hooks/useLottery";
+import { Separator } from "@components/Separator";
 
 export const LotterySection = () => {
 	const { query } = useRouter();
@@ -42,7 +42,7 @@ export const LotterySection = () => {
 					</div>
 				</CardContent>
 			</Card>
-			<Divider style={{ backgroundColor: constants.THEME.GRAY }} />
+			<Separator />
 			{
 				lottery.entrants.map((user, key) => <ShallowUser key={key} user={user} />)
 			}
