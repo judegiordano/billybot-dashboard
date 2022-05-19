@@ -11,6 +11,7 @@ import { AppIcon } from "@components/AppIcon";
 import { UserGamblingDropdown } from "./UserGamblingDropdown";
 import { UserEngagementDropdown } from "./UserEngagementDropdown";
 import { Separator } from "@components/Separator";
+import { UserLotteryDropdown } from "./UserLotteryDropdown";
 
 interface IUserCardProps {
 	user: IUser
@@ -58,6 +59,7 @@ export const UserCard = ({ user, index }: IUserCardProps) => {
 					<Separator />
 					<UserEngagementDropdown engagement={user.metrics.engagement} />
 					<UserGamblingDropdown gambling={user.metrics.gambling} />
+					<UserLotteryDropdown lottery={user.metrics.lottery} />
 					<Separator />
 					<div className="pt-2 text-sm font-medium text-theme-gray font-content">
 						<div>

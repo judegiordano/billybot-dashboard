@@ -42,11 +42,7 @@ export const ServerCard = () => {
 					</div>
 					<div className="max-w-[400px]">
 						<Separator />
-						<ServerInfo
-							member_count={server.user_count}
-							allowance_rate={server.settings.allowance_rate}
-							birthday_bucks={server.settings.birthday_bucks}
-						/>
+						<ServerInfo server={server} />
 					</div>
 				</CardContent>
 			</Card>

@@ -1,25 +1,33 @@
 import React from "react";
 
+import type { IServer } from "@types";
+
 export const ServerInfo = ({
-	member_count,
-	allowance_rate,
-	birthday_bucks
+	server
 }: {
-	member_count: number
-	allowance_rate: number
-	birthday_bucks: number
+	server: IServer
 }) => {
+	const { settings } = server;
 	return (
 		<div className="pt-2 text-theme-gray font-content">
 			<div className="bg-theme-dark-black max-w-[400px] p-5">
 				<div className="font-bold text-theme-gray font-content">
-					members: {member_count}
+					members: {server.user_count}
 				</div>
 				<div className="font-bold text-theme-gray font-content">
-					weekly allowance rate: <span className="text-theme-green">{allowance_rate}</span>
+					weekly allowance rate: <span className="text-theme-green">{settings.allowance_rate}</span>
 				</div>
 				<div className="font-bold text-theme-gray font-content">
-					birthday bonus: <span className="text-theme-green">{birthday_bucks}</span>
+					birthday bonus: <span className="text-theme-green">{settings.birthday_bucks}</span>
+				</div>
+				<div className="font-bold text-theme-gray font-content">
+					lottery cost: <span className="text-theme-green">{settings.lottery_cost}</span>
+				</div>
+				<div className="font-bold text-theme-gray font-content">
+					tax rate: <span className="text-theme-green">{settings.tax_rate}</span>
+				</div>
+				<div className="font-bold text-theme-gray font-content">
+					taxes collected: <span className={`text-theme-${server.taxes_collected ? "green" : "red"}`}>{server.taxes_collected.toString()}</span>
 				</div>
 			</div>
 		</div>

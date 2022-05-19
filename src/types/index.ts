@@ -31,6 +31,7 @@ export interface IServerSettings {
 	base_lottery_jackpot: number
 	allowance_rate: number
 	birthday_bucks: number
+	tax_rate: number
 }
 
 export interface IServer extends IModel {
@@ -39,6 +40,7 @@ export interface IServer extends IModel {
 	icon_hash: string
 	settings: IServerSettings
 	user_count: number
+	taxes_collected: boolean
 }
 
 export interface IEngagementMetrics {
@@ -74,9 +76,16 @@ export interface IGamblingMetrics {
 	}
 }
 
+export interface ILotteryMetrics {
+	overall_winnings: number;
+	tickets_purchased: number;
+	wins: number;
+}
+
 export interface IUserMetrics {
 	engagement: IEngagementMetrics
 	gambling: IGamblingMetrics
+	lottery: ILotteryMetrics
 }
 
 export interface IUser extends IModel {
