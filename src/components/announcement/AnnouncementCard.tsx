@@ -3,30 +3,13 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
 import type { IAnnouncement } from "@types";
-import { constants, readableDate, readableTime } from "@utils";
+import { constants } from "@utils";
 import { Separator } from "@components/Separator";
+import { TimeStamp } from "@components/TimeStamp";
 
 interface IAnnouncementCardProps {
 	announcement: IAnnouncement
 }
-
-const Timestamp = ({ date }: { date: Date }) => {
-	return (
-		<div className="pl-3 text-[11px] italic text-theme-gray">
-			<div className="inline-flex pr-1 font-bold align-middle">
-				{
-					readableDate(new Date(date).toISOString())
-				}
-			</div>
-			:
-			<div className="inline-flex pl-1 font-bold align-middle">
-				{
-					readableTime(new Date(date).toISOString())
-				}
-			</div>
-		</div>
-	);
-};
 
 const PosterInfo = ({ announcement }: { announcement: IAnnouncement }) => {
 	return (
@@ -56,7 +39,7 @@ export const AnnouncementCard: React.FC<IAnnouncementCardProps> = ({
 				</div>
 				<Separator />
 				<PosterInfo announcement={announcement} />
-				<Timestamp date={announcement.created_at} />
+				<TimeStamp date={announcement.created_at} />
 			</CardContent>
 		</Card>
 	);

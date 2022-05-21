@@ -14,6 +14,13 @@ export enum CardSuit {
 	diamonds = "diamonds",
 }
 
+export enum FeatureStatus {
+	rejected = "rejected",
+	pending = "pending",
+	in_progress = "in_progress",
+	completed = "completed"
+}
+
 export interface ICard {
 	suit: CardSuit
 	value: number
@@ -25,6 +32,17 @@ export interface IAnnouncement extends IModel {
 	text: string
 	channel_name: string
 }
+
+export interface IFeature extends IModel {
+	server_id: string
+	user_id: string
+	user: IUser
+	title: string
+	body: string
+	status: FeatureStatus
+	up_votes: number
+}
+
 
 export interface IServerSettings {
 	lottery_cost: number

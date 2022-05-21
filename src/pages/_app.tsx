@@ -8,7 +8,7 @@ import { Notifications } from "@components/Notifications";
 const provider = ((cache) => () => cache)(new Map());
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function MyApp({ Component, pageProps }: any) {
+function MyApp({ Component, pageProps } : any ) {
 	return (
 		<>
 			<SWRConfig value={{ provider }}>

@@ -15,9 +15,11 @@ import { useServer } from "@hooks/useServer";
 import { Error } from "@components/Error";
 import { AnnouncementSection } from "@components/announcement/AnnouncementSection";
 import { LotterySection } from "@components/lottery/LotterySection";
+import { FeaturesSection } from "@components/feature/FeaturesSection"
 import { constants } from "@utils";
 
 const Server = () => {
+
 	const [tabValue, setTabValue] = useState("1");
 	const toggleTab = (_: unknown, newValue: string) => setTabValue(newValue);
 
@@ -38,6 +40,7 @@ const Server = () => {
 
 	if (errorState) return <Error message={errorState} />;
 	if (isLoading || !server) return <Loader />;
+
 	return (
 		<div className="max-w-[800px] min-h-screen pt-5 pb-5 m-auto px-5">
 			<ServerCard />
@@ -49,6 +52,7 @@ const Server = () => {
 								<Tab style={{ color: constants.THEME.GRAY }} label="Users" value="1" />
 								<Tab style={{ color: constants.THEME.GRAY }} label="Announcements" value="2" />
 								<Tab style={{ color: constants.THEME.GRAY }} label="Lottery" value="3" />
+								<Tab style={{ color: constants.THEME.GRAY }} label="Feature Requests" value="4" />
 							</TabList>
 						</Box>
 						<TabPanel value="1">
@@ -59,6 +63,9 @@ const Server = () => {
 						</TabPanel>
 						<TabPanel value="3">
 							<LotterySection />
+						</TabPanel>
+						<TabPanel value="4">
+							<FeaturesSection />
 						</TabPanel>
 					</TabContext>
 				</Box>
