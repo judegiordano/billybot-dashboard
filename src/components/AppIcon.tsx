@@ -21,9 +21,9 @@ export const AppIcon = ({
 	case "ticket":
 		return <ConfirmationNumberIcon fontSize={size} style={{ color }} />;
 	case "crown":
-		return <Image src="/crown.svg" height={20} width={20} />;
+		return <Image loading="eager" priority src="/crown.svg" height={20} width={20} />;
 	case "jester":
-		return <Image src="/jester.svg" height={20} width={20} />;
+		return <Image loading="eager" priority src="/jester.svg" height={20} width={20} />;
 	default:
 		return null;
 	}
