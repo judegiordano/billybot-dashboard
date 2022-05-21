@@ -15,7 +15,7 @@ import { useServer } from "@hooks/useServer";
 import { Error } from "@components/Error";
 import { AnnouncementSection } from "@components/announcement/AnnouncementSection";
 import { LotterySection } from "@components/lottery/LotterySection";
-import { FeaturesSection } from "@components/feature/FeaturesSection"
+import { FeaturesSection } from "@components/feature/FeaturesSection";
 import { constants } from "@utils";
 
 const Server = () => {
