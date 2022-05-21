@@ -27,6 +27,18 @@ export const UserCard = ({ user, index }: IUserCardProps) => {
 			icon: <AppIcon type="verified" color={constants.THEME.BLUE} />
 		},
 		{
+			show: user.is_mayor,
+			tooltip: `${user.username} is the Boy Town mayor`,
+			alt: "mayor",
+			icon: <AppIcon type="crown"/>
+		},
+		{
+			show: user.is_fool,
+			tooltip: `${user.username} is the Boy Town fool`,
+			alt: "fool",
+			icon: <AppIcon type="jester" />
+		},
+		{
 			show: index < 3,
 			tooltip: `${user.username} is a server noblemen`,
 			alt: "noblemen",
