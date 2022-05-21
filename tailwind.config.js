@@ -13,7 +13,7 @@ module.exports = {
 				"theme-green": "#57F287",
 				"theme-yellow": "#FEE75C",
 				"theme-red": "#ef4444",
-				"theme-purple": "#5865F2",
+				"theme-purple": "#5865F2"
 			},
 		}
 	},
