@@ -5,33 +5,16 @@ import CardContent from "@mui/material/CardContent";
 import { FeatureStatus, IFeature } from "@types";
 import { constants, readableDate, readableTime } from "@utils";
 import { Separator } from "@components/Separator";
+import { TimeStamp } from "@components/TimeStamp";
 
 interface IFeatureCardProps {
 	feature: IFeature
 }
 
-const Timestamp = ({ date }: { date: Date }) => {
-	return (
-		<div className="text-[11px] italic text-theme-gray">
-			<div className="inline-flex pr-1 font-bold align-middle">
-				{
-					readableDate(new Date(date).toISOString())
-				}
-			</div>
-			:
-			<div className="inline-flex pl-1 font-bold align-middle">
-				{
-					readableTime(new Date(date).toISOString())
-				}
-			</div>
-		</div>
-	);
-};
-
-const PosterInfo = ({ feature }: { feature: IFeature }) => {
+const PosterInfo = ({ username }: { username: string }) => {
 	return (
 		<div className="inline-flex pr-1 text-theme-gray">
-			Suggested By - {feature.user.username}
+			Suggested By - {username}
 		</div>
 	);
 };
@@ -43,25 +26,11 @@ const statusColorLookup: Record<FeatureStatus, string> = {
 	[FeatureStatus.in_progress]: "theme-yellow"
 };
 
-const PendingStatus = ({ feature }: { feature: IFeature }) => {
+const PendingStatus = ({status, updated} : {status : FeatureStatus, updated: Date}) => {
 	return (
 		<div className="inline-flex pt-1 pl-0.5 text-[11px] align-middle">
-			<div className={`mr-1 text-${statusColorLookup[feature.status]}`}># {feature.status}</div>
-			<div className="inline-flex pr-1 font-bold align-middle text-theme-gray">
-				at
-				<div className="mx-1">
-					{
-						readableDate(new Date(feature.updated_at).toISOString())
-					}
-				</div>
-				:
-				<div className="mx-1 ">
-					{
-						readableTime(new Date(feature.updated_at).toISOString())
-					}
-				</div>		
-			</div>
-			
+			<div className={`mr-1 text-${statusColorLookup[status]}`}># {status}</div>
+			<TimeStamp date={updated} />
 		</div>
 	);
 };
@@ -82,10 +51,10 @@ export const FeatureCard: React.FC<IFeatureCardProps> = ({
 				<div className="p-2 overflow-hidden rounded-md bg-theme-dark-black text-theme-gray">
 					{feature.body}
 				</div>
-				<PendingStatus feature={feature} />
+				<PendingStatus status={feature.status} updated={feature.updated_at} />
 				<Separator />
-				<PosterInfo feature={feature} />
-				<Timestamp date={feature.created_at} />
+				<PosterInfo username={feature.user.username} />
+				<TimeStamp date={feature.created_at} />
 			</CardContent>
 		</Card>
 	);
