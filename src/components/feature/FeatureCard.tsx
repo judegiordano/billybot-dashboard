@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
 import { FeatureStatus, IFeature } from "@types";
-import { constants, readableDate, readableTime } from "@utils";
+import { constants } from "@utils";
 import { Separator } from "@components/Separator";
 import { TimeStamp } from "@components/TimeStamp";
 

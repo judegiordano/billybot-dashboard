@@ -6,7 +6,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { Loader } from "@components/Loader";
 import { EmptyDataState } from "@components/EmptyDataState";
 import { useFeatures } from "@hooks/useFeatures";
-import { FeaturePagination } from "@store/useFeatures";
+import type { FeaturePagination } from "@store/useFeatures";
 import { FeatureCard } from "./FeatureCard";
 
 export const FeaturesSection = () => {
