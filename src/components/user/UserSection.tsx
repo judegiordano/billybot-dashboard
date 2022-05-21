@@ -15,15 +15,17 @@ export const UserSection = () => {
 	const [page, setPage] = useState(1);
 	const [username, setUsername] = useState("");
 	const [isMayor, setIsMayor] = useState<boolean | null>(null);
+	const [isFool, setIsFool] = useState<boolean | null>(null);
 	const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
 	const [bucks, setBucks] = useState<number>(-1);
-	const key = `${query.server_id}?page=${page}&username=${username}&is_mayor=${isMayor}&is_admin=${isAdmin}&billy_bucks=${bucks}`;
+	const key = `${query.server_id}?page=${page}&username=${username}&is_mayor=${isMayor}&is_fool=${isFool}&is_admin=${isAdmin}&billy_bucks=${bucks}`;
 	const { data } = useUsers(key);
 	const [paginatedUsers, setPaginatedUsers] = useState<UserPagination | undefined>();
 
 	const changePage = (_: unknown, value: number) => setPage(value);
 	const filteringComponents = [
 		{ text: "mayor", method: () => isMayor === true ? setIsMayor(null) : setIsMayor(true) },
+		{ text: "fool", method: () => isFool === true ? setIsFool(null) : setIsFool(true) },
 		{ text: "bot admins", method: () => isAdmin === true ? setIsAdmin(null) : setIsAdmin(true) },
 		{ text: "sort bucks", method: () => bucks === -1 ? setBucks(1) : setBucks(-1) },
 	];

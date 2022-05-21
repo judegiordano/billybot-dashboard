@@ -8,8 +8,8 @@ export const AppIcon = ({
 	color,
 	size = "small"
 }: {
-	type: "verified" | "money" | "ticket",
-	color: string,
+	type: "verified" | "money" | "ticket" | "crown" | "jester",
+	color?: string,
 	size?: "large" | "medium" | "small"
 }) => {
 	switch (type) {
@@ -19,6 +19,10 @@ export const AppIcon = ({
 		return <AttachMoneyIcon fontSize={size} style={{ color }} />;
 	case "ticket":
 		return <ConfirmationNumberIcon fontSize={size} style={{ color }} />;
+	case "crown":
+		return <img src="/crown.svg" height={20} width={20}/>;
+	case "jester":
+		return <img src="/jester.svg" height={20} width={20}/>;
 	default:
 		return null;
 	}
