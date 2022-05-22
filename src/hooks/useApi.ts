@@ -1,6 +1,6 @@
 import useSWR from "swr";
 
-import { NEXT_PUBLIC_BACKEND_API } from "src/utils/config";
+import { config } from "@utils";
 
 type UseApi<T> = {
 	data: T
@@ -16,7 +16,7 @@ type UseApiConfig<T> = {
 }
 
 async function fetcher<T>(key = "") {
-	const response = await fetch(`${NEXT_PUBLIC_BACKEND_API}/${key}`, {
+	const response = await fetch(`${config.NEXT_PUBLIC_BACKEND_API}/${key}`, {
 		method: "GET",
 	});
 	const data = await response.json();
