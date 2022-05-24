@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
-
-import { config } from "@utils";
-import { useAuthStore } from "@store/useAuth";
 import toast from "react-hot-toast";
+import Button from "@mui/material/Button";
+
+import { config, constants } from "@utils";
+import { useAuthStore } from "@store/useAuth";
+import { useUserInfo } from "@hooks/useUserInfo";
 
 const index = ({
 	refresh_token,
@@ -14,6 +16,7 @@ const index = ({
 	access_token: string
 }) => {
 	const { authCache, updateAuthCache, clearAuthCache } = useAuthStore();
+	const { authCache: userInfo, logout } = useUserInfo();
 	const { push } = useRouter();
 
 	const refresh = async () => {
@@ -39,9 +42,17 @@ const index = ({
 	}, []);
 
 	return (
-		<div>
-			<div>{authCache.access_token}</div>
-			<div>{authCache.refresh_token}</div>
+		<div className="min-h-screen pt-10 m-auto text-2xl text-center">
+			<div className="text-theme-gray">Welcome, <span className="text-theme-purple">{userInfo.username}</span>!</div>
+			<div className="pt-2">
+				<Button
+					className="font-extrabold"
+					style={{ backgroundColor: constants.THEME.PURPLE, color: constants.THEME.WHITE }}
+					onClick={async () => await logout()}
+				>
+					logout
+				</Button>
+			</div>
 		</div>
 	);
 };

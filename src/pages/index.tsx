@@ -28,7 +28,6 @@ export const Home = () => {
 			toast.error(data.error ?? "internal server error");
 			return;
 		}
-		setIsLoading(false);
 		return data;
 	}
 
@@ -44,9 +43,8 @@ export const Home = () => {
 						}}
 						disabled={isLoading}
 						onClick={async () => {
-							setIsLoading(true);
 							const { redirect_url } = await getRedirect() as { redirect_url: string };
-							push(redirect_url);
+							await push(redirect_url);
 							setIsLoading(false);
 						}}
 						endIcon={<Spinner visible={isLoading} />}
