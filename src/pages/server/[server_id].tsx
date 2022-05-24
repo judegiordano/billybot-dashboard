@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
+import Tabs from "@mui/material/Tabs";
 import TabPanel from "@mui/lab/TabPanel";
 
 import type { IServer } from "@types";
@@ -46,14 +46,21 @@ const Server = () => {
 			<ServerCard />
 			<div className="pt-[10px]">
 				<Box sx={{ width: "100%" }}>
-					<TabContext value={tabValue}>
+					<TabContext
+						value={tabValue}>
 						<Box sx={{ borderBottom: 1, borderColor: constants.THEME.BLACK }}>
-							<TabList onChange={toggleTab} >
+							<Tabs
+								value={tabValue}
+								onChange={toggleTab}
+								variant="scrollable"
+								scrollButtons
+								allowScrollButtonsMobile
+							>
 								<Tab style={{ color: constants.THEME.GRAY }} label="Users" value="1" />
 								<Tab style={{ color: constants.THEME.GRAY }} label="Announcements" value="2" />
 								<Tab style={{ color: constants.THEME.GRAY }} label="Lottery" value="3" />
 								<Tab style={{ color: constants.THEME.GRAY }} label="Feature Requests" value="4" />
-							</TabList>
+							</Tabs>
 						</Box>
 						<TabPanel value="1">
 							<UserSection />
