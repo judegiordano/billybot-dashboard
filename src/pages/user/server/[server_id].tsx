@@ -17,9 +17,9 @@ import { AnnouncementSection } from "@components/announcement/AnnouncementSectio
 import { LotterySection } from "@components/lottery/LotterySection";
 import { FeaturesSection } from "@components/feature/FeaturesSection";
 import { constants } from "@utils";
+import { AuthGate } from "@components/auth/AuthGate";
 
 const Server = () => {
-
 	const [tabValue, setTabValue] = useState("1");
 	const toggleTab = (_: unknown, newValue: string) => setTabValue(newValue);
 
@@ -42,43 +42,45 @@ const Server = () => {
 	if (isLoading || !server) return <Loader />;
 
 	return (
-		<div className="max-w-[800px] min-h-screen pt-5 pb-5 m-auto px-5">
-			<ServerCard />
-			<div className="pt-[10px]">
-				<Box sx={{ width: "100%" }}>
-					<TabContext
-						value={tabValue}>
-						<Box sx={{ borderBottom: 1, borderColor: constants.THEME.BLACK }}>
-							<Tabs
-								value={tabValue}
-								onChange={toggleTab}
-								variant="scrollable"
-								scrollButtons
-								allowScrollButtonsMobile
-							>
-								<Tab style={{ color: constants.THEME.GRAY }} label="Users" value="1" />
-								<Tab style={{ color: constants.THEME.GRAY }} label="Announcements" value="2" />
-								<Tab style={{ color: constants.THEME.GRAY }} label="Lottery" value="3" />
-								<Tab style={{ color: constants.THEME.GRAY }} label="Feature Requests" value="4" />
-							</Tabs>
-						</Box>
-						<TabPanel value="1">
-							<UserSection />
-						</TabPanel>
-						<TabPanel value="2">
-							<AnnouncementSection />
-						</TabPanel>
-						<TabPanel value="3">
-							<LotterySection />
-						</TabPanel>
-						<TabPanel value="4">
-							<FeaturesSection />
-						</TabPanel>
-					</TabContext>
-				</Box>
+		<AuthGate>
+			<div className="max-w-[800px] min-h-screen pt-5 pb-5 m-auto px-5">
+				<ServerCard />
+				<div className="pt-[10px]">
+					<Box sx={{ width: "100%" }}>
+						<TabContext
+							value={tabValue}>
+							<Box sx={{ borderBottom: 1, borderColor: constants.THEME.BLACK }}>
+								<Tabs
+									value={tabValue}
+									onChange={toggleTab}
+									variant="scrollable"
+									scrollButtons
+									allowScrollButtonsMobile
+								>
+									<Tab style={{ color: constants.THEME.GRAY }} label="Users" value="1" />
+									<Tab style={{ color: constants.THEME.GRAY }} label="Announcements" value="2" />
+									<Tab style={{ color: constants.THEME.GRAY }} label="Lottery" value="3" />
+									<Tab style={{ color: constants.THEME.GRAY }} label="Feature Requests" value="4" />
+								</Tabs>
+							</Box>
+							<TabPanel value="1">
+								<UserSection />
+							</TabPanel>
+							<TabPanel value="2">
+								<AnnouncementSection />
+							</TabPanel>
+							<TabPanel value="3">
+								<LotterySection />
+							</TabPanel>
+							<TabPanel value="4">
+								<FeaturesSection />
+							</TabPanel>
+						</TabContext>
+					</Box>
+				</div>
+				<ScrollToTop />
 			</div>
-			<ScrollToTop />
-		</div>
+		</AuthGate>
 	);
 };
 

@@ -21,6 +21,11 @@ export enum FeatureStatus {
 	completed = "completed"
 }
 
+export enum ClientConnectionStatus {
+	connected = "connected",
+	disconnected = "disconnected"
+}
+
 export interface ICard {
 	suit: CardSuit
 	value: number
@@ -157,4 +162,5 @@ export interface IServerMetadata extends IServer {
 	lottery: ILotteryInfo
 }
 
-export type ApiResponse = IApiError & UserLookup & IUser
+export type ApiResponse<T> = { data: IApiError & T }
+export type ApiFetchResponse<T> = IApiError & T
