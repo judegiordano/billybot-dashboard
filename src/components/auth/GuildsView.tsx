@@ -8,26 +8,26 @@ import { config } from "@utils";
 import { Separator } from "@components/Separator";
 
 interface IGuildsViewProps {
-	guild: IServer
+	server: IServer
 }
 
-export const GuildsView = ({ guild }: IGuildsViewProps) => {
+export const GuildsView = ({ server }: IGuildsViewProps) => {
 	return (
 		<div className="pt-5 font-bold text-left font-content">
 			<div className="inline-flex pr-2 align-middle">
-				<Tooltip title={guild.server_id}>
+				<Tooltip title={server.server_id}>
 					<Avatar
 						sx={{ width: 56, height: 56 }}
-						alt={guild.name}
-						src={`https://cdn.discordapp.com/icons/${guild.server_id}/${guild.icon_hash}.png`}
+						alt={server.name}
+						src={`https://cdn.discordapp.com/icons/${server.server_id}/${server.icon_hash}.png`}
 					/>
 				</Tooltip>
 			</div>
 			<AppLink
 				target="_blank"
-				href={`${config.NEXT_PUBLIC_DOMAIN}/user/server/${guild.server_id}`}
+				href={`${config.NEXT_PUBLIC_DOMAIN}/user/server/${server.server_id}`}
 			>
-				{guild.name}
+				{server.name}
 			</AppLink>
 			<div className="pt-2">
 				<Separator />

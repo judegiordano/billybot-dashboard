@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import toast from "react-hot-toast";
@@ -8,7 +9,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 
 import { config, nextBackend } from "@utils";
-import { useRouter } from "next/router";
 import { useAuth, useAuthStore, IAuthUser } from "@hooks/useAuth";
 
 interface IAuthGateProps {

@@ -40,7 +40,7 @@ export const Home = () => {
 					)
 				}
 				{
-					guilds?.map((guild, key) => <GuildsView key={key} guild={guild} />)
+					guilds?.map((guild, key) => <GuildsView key={key} server={guild} />)
 				}
 			</div>
 		</AuthGate>
