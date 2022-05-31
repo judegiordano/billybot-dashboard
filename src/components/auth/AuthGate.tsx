@@ -7,10 +7,10 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 
-import { useAuth } from "@hooks/useAuth";
 import { IAuthUser, useAuthStore } from "@store/useAuth";
 import { config, nextBackend } from "@utils";
 import { useRouter } from "next/router";
+import { useAuth } from "@hooks/test/useAuth";
 
 interface IAuthGateProps {
 	children: React.ReactNode

@@ -11,9 +11,7 @@ interface IGuildsViewProps {
 	guild: IServer
 }
 
-export const GuildsView: React.FC<IGuildsViewProps> = ({
-	guild
-}: IGuildsViewProps): JSX.Element => {
+export const GuildsView = ({ guild }: IGuildsViewProps) => {
 	return (
 		<div className="pt-5 font-bold text-left font-content">
 			<div className="inline-flex pr-2 align-middle">

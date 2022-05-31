@@ -1,87 +1,57 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import Box from "@mui/material/Box";
-import Tab from "@mui/material/Tab";
-import TabContext from "@mui/lab/TabContext";
-import Tabs from "@mui/material/Tabs";
-import TabPanel from "@mui/lab/TabPanel";
+import type { GetServerSidePropsContext } from "next";
 
-import type { IServer } from "@types";
-import { UserSection } from "@components/user/UserSection";
-import { ServerCard } from "@components/server/ServerCard";
-import { ScrollToTop } from "@components/ScrollToTop";
+import { config } from "@utils";
+import type { IServerInfo } from "@types";
 import { Loader } from "@components/Loader";
-import { Error } from "@components/Error";
-import { AnnouncementSection } from "@components/announcement/AnnouncementSection";
-import { LotterySection } from "@components/lottery/LotterySection";
-import { FeaturesSection } from "@components/feature/FeaturesSection";
-import { constants } from "@utils";
-import { AuthGate } from "@components/auth/AuthGate";
 import { useServer } from "@hooks/test/useServer";
+import { ScrollToTop } from "@components/ScrollToTop";
+import { AuthGate } from "@components/auth/AuthGate";
+import { ServerCard } from "@components/server/ServerCard";
+import { ServerDataTabulation } from "@components/ServerDataTabulation";
 
-const Server = () => {
-	const [tabValue, setTabValue] = useState("1");
-	const toggleTab = (_: unknown, newValue: string) => setTabValue(newValue);
-
-	const { query } = useRouter();
-	const { data, loading, error } = useServer(query.server_id as string);
-	const [server, setServer] = useState<IServer>();
-	const [errorState, setErrorState] = useState<string | undefined>();
-
-	useEffect(() => {
-		if (!error) return setErrorState(undefined);
-		setErrorState(error.toString());
-		console.log({ error });
-	}, [error]);
+const Server = ({ server_id }: { server_id: string }) => {
+	const { data, loading } = useServer(server_id);
+	const [server, setServer] = useState<IServerInfo | undefined>();
 
 	useEffect(() => {
-		data && setServer(data);
+		setServer(data);
 	}, [data]);
-
-	if (errorState) return <Error message={errorState} />;
-	if (loading || !server) return <Loader />;
 
 	return (
 		<AuthGate>
-			<div className="max-w-[800px] min-h-screen pt-5 pb-5 m-auto px-5">
-				<ServerCard />
-				<div className="pt-[10px]">
-					<Box sx={{ width: "100%" }}>
-						<TabContext
-							value={tabValue}>
-							<Box sx={{ borderBottom: 1, borderColor: constants.THEME.BLACK }}>
-								<Tabs
-									value={tabValue}
-									onChange={toggleTab}
-									variant="scrollable"
-									scrollButtons
-									allowScrollButtonsMobile
-								>
-									<Tab style={{ color: constants.THEME.GRAY }} label="Users" value="1" />
-									<Tab style={{ color: constants.THEME.GRAY }} label="Announcements" value="2" />
-									<Tab style={{ color: constants.THEME.GRAY }} label="Lottery" value="3" />
-									<Tab style={{ color: constants.THEME.GRAY }} label="Feature Requests" value="4" />
-								</Tabs>
-							</Box>
-							<TabPanel value="1">
-								<UserSection />
-							</TabPanel>
-							<TabPanel value="2">
-								<AnnouncementSection />
-							</TabPanel>
-							<TabPanel value="3">
-								<LotterySection />
-							</TabPanel>
-							<TabPanel value="4">
-								<FeaturesSection />
-							</TabPanel>
-						</TabContext>
-					</Box>
+			{loading && !server && (
+				<div className="min-h-screen m-auto max-w-[500px] mr-auto text-theme-gray">
+					<Loader />
 				</div>
-				<ScrollToTop />
-			</div>
+			)}
+			{
+				server && (
+					<div className="min-h-screen m-auto max-w-[750px] mr-auto text-theme-gray">
+						<ServerCard />
+						<ServerDataTabulation />
+					</div>
+				)
+			}
+			<ScrollToTop />
 		</AuthGate>
 	);
 };
 
-export default React.memo(Server);
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+	if (!context.query.server_id) {
+		return {
+			redirect: {
+				destination: `${config.NEXT_PUBLIC_DOMAIN}/`,
+				permanent: false,
+			},
+		};
+	}
+	return {
+		props: {
+			server_id: context.query.server_id
+		}
+	};
+}
+
+export default Server;
