@@ -17,7 +17,7 @@ export default async function guilds(req: NextApiRequest, res: NextApiResponse) 
 				Authorization: `Bearer: ${token}`
 			}
 		});
-		res.json(data);
+		res.status(200).json(data);
 	} catch (error) {
 		res.status(500).json({ error });
 	}

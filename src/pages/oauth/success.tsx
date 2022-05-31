@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import { ClientConnectionStatus } from "btbot-types";
 
 import { constants } from "@utils";
 import { AppLink } from "@components/AppLink";
 import { useAuthStore } from "@hooks/useAuth";
-import { ClientConnectionStatus } from "@types";
 
 const success = () => {
 	const { query } = useRouter();

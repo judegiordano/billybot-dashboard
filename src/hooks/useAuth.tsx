@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { useState } from "react";
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import toast from "react-hot-toast";
 import useSWR from "swr";
-import type { IClient } from "btbot-types";
+import { ClientConnectionStatus, IClient } from "btbot-types";
 
 import { nextBackend } from "@utils";
-import { ClientConnectionStatus } from "@types";
 import { storageEngine } from "@store/engine";
 
 export interface IAuthUser {
@@ -20,6 +20,7 @@ export interface IAuthUser {
 		username?: string
 	}
 }
+
 export type UseAuthUser = {
 	authCache: IAuthUser | null
 	updateAuthCache: (u: Partial<IAuthUser>) => void
@@ -46,9 +47,11 @@ export const useAuthStore = create<UseAuthUser>(
 
 export function useAuth() {
 	const { authCache, updateAuthCache } = useAuthStore();
+	const [loading, setLoading] = useState<boolean>(true);
 
 	async function fetcher(key: string) {
 		try {
+			setLoading(true);
 			if (authCache?.connection_status === ClientConnectionStatus.disconnected) {
 				console.log("no client connected");
 				return;
@@ -70,10 +73,13 @@ export function useAuth() {
 		}
 	}
 	const { data, error } = useSWR("refresh", () => fetcher("refresh"), {
-		refreshInterval: 60_000
+		refreshInterval: 60_000,
+		onSuccess: () => setLoading(true),
+		onError: () => setLoading(false)
 	});
 	return {
-		isLoading: data == null && !error,
+		data,
+		loading,
 		authCache,
 		error
 	};
