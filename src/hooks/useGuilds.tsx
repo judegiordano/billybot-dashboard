@@ -7,8 +7,7 @@ import toast from "react-hot-toast";
 import { ClientConnectionStatus, IServer } from "btbot-types";
 
 import { storageEngine } from "@store/engine";
-import { backendApi, nextBackend } from "@utils";
-import type { ILotteryInfo, IServerInfo } from "@types";
+import { nextBackend } from "@utils";
 import { useAuthStore } from "./useAuth";
 
 export type UseGuilds = {
