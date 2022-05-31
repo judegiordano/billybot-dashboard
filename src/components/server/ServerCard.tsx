@@ -7,7 +7,7 @@ import { ServerInfo } from "./ServerInfo";
 import { constants } from "@utils";
 import { Loader } from "@components/Loader";
 import { Separator } from "@components/Separator";
-import { useServerInfoStore } from "@hooks/test/useServer";
+import { useServerInfoStore } from "@hooks/useServer";
 import type { IServerInfo } from "@types";
 
 export const ServerCard = () => {

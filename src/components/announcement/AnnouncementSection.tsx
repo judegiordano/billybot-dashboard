@@ -5,7 +5,7 @@ import Checkbox from "@mui/material/Checkbox";
 
 import { Loader } from "@components/Loader";
 import { AnnouncementCard } from "./AnnouncementCard";
-import { useAnnouncements, AnnouncementPagination } from "@hooks/test/useAnnouncements";
+import { useAnnouncements, AnnouncementPagination } from "@hooks/useAnnouncements";
 import { EmptyDataState } from "@components/EmptyDataState";
 
 export const AnnouncementSection = () => {

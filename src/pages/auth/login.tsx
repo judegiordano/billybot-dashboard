@@ -9,7 +9,7 @@ import Input from "@mui/material/Input";
 import type { IClient } from "btbot-types";
 
 import { config, constants, nextBackend } from "@utils";
-import { useAuthStore } from "@store/useAuth";
+import { useAuthStore } from "@hooks/useAuth";
 import { AppLink } from "@components/AppLink";
 
 const Spinner = ({ visible }: { visible: boolean }) => {

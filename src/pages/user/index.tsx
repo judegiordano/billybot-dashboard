@@ -5,7 +5,7 @@ import type { IServer } from "btbot-types";
 import { constants } from "@utils";
 import { AuthGate } from "@components/auth/AuthGate";
 import { GuildsView } from "@components/auth/GuildsView";
-import { useGuilds } from "@hooks/test/useGuilds";
+import { useGuilds } from "@hooks/useGuilds";
 
 const Spinner = ({
 	visible,

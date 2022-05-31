@@ -4,7 +4,7 @@ import type { GetServerSidePropsContext } from "next";
 import { config } from "@utils";
 import type { IServerInfo } from "@types";
 import { Loader } from "@components/Loader";
-import { useServer } from "@hooks/test/useServer";
+import { useServer } from "@hooks/useServer";
 import { ScrollToTop } from "@components/ScrollToTop";
 import { AuthGate } from "@components/auth/AuthGate";
 import { ServerCard } from "@components/server/ServerCard";

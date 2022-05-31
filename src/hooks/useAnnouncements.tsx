@@ -1,13 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from "react";
 import create from "zustand";
 import { persist } from "zustand/middleware";
-import useSWR from "swr";
-import toast from "react-hot-toast";
 import type { IAnnouncement } from "btbot-types";
 
 import { storageEngine } from "@store/engine";
-import { backendApi } from "@utils";
+import { useApi } from "./useApi";
 
 export type AnnouncementPagination = {
 	pages: number,
@@ -37,30 +34,10 @@ export const useAnnouncementsStore = create<UseAnnouncements>(
 
 export const useAnnouncements = (key: string) => {
 	const url = `announcements/server/${key}`;
-	const [loading, setLoading] = useState<boolean>(true);
 	const { announcementsCache, updateAnnouncementsCache, clearAnnouncementCache } = useAnnouncementsStore();
-
-	async function fetcher<T>(url: string) {
-		try {
-			setLoading(true);
-			const data = await backendApi.get<T>(url);
-			return data;
-		} catch (error) {
-			toast.error(error as string);
-			setLoading(false);
-		}
-	}
-	const { data, error } = useSWR(url, () => fetcher<AnnouncementPagination>(url), {
-		refreshInterval: 10_000,
-		onSuccess: data => {
-			updateAnnouncementsCache(data as AnnouncementPagination);
-			setLoading(false);
-		},
-		onError: () => {
-			setLoading(false);
-		}
+	const { data, setLoading, error, loading } = useApi<AnnouncementPagination>(url, {
+		onSuccess: data => updateAnnouncementsCache(data as AnnouncementPagination)
 	});
-
 	return {
 		data,
 		error,

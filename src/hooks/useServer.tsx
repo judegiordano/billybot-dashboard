@@ -1,12 +1,9 @@
-import { useState } from "react";
 import create from "zustand";
 import { persist } from "zustand/middleware";
-import useSWR from "swr";
-import toast from "react-hot-toast";
 
 import { storageEngine } from "@store/engine";
-import { backendApi } from "@utils";
 import type { IServerInfo } from "@types";
+import { useApi } from "./useApi";
 
 export type UseServerInfo = {
 	serverInfoCache: Partial<IServerInfo> | null
@@ -34,31 +31,10 @@ export const useServerInfoStore = create<UseServerInfo>(
 
 export const useServer = (key: string) => {
 	const url = `server/information/${key}`;
-	const [loading, setLoading] = useState<boolean>(true);
 	const { serverInfoCache, updateServerInfoCache, clearServerInfoCache } = useServerInfoStore();
-
-	async function fetcher<T>(url: string) {
-		try {
-			setLoading(true);
-			const data = await backendApi.get<T>(url);
-			return data;
-		} catch (error) {
-			toast.error(error as string);
-			setLoading(false);
-		}
-	}
-	const { data, error } = useSWR(url, () => fetcher<IServerInfo>(url), {
-		refreshInterval: 10_000,
-		onSuccess: data => {
-			updateServerInfoCache(data as IServerInfo);
-			setLoading(false);
-		},
-		onError: () => {
-			updateServerInfoCache(null);
-			setLoading(false);
-		}
+	const { data, setLoading, error, loading } = useApi<IServerInfo>(url, {
+		onSuccess: data => updateServerInfoCache(data as IServerInfo)
 	});
-
 	return {
 		data,
 		error,

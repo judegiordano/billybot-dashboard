@@ -1,16 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import create from "zustand";
 import { persist } from "zustand/middleware";
+import type { IFeature } from "btbot-types";
 
-import { storageEngine } from "./engine";
-import type { IFeature } from "@types";
+import { storageEngine } from "@store/engine";
+import { useApi } from "./useApi";
 
 export type FeaturePagination = {
 	pages: number,
 	features: IFeature[]
 }
 
-type UseFeatures = {
+export type UseFeatures = {
 	featuresCache: FeaturePagination
 	updateFeaturesCache: (a: FeaturePagination) => void
 	clearFeatureCache: () => void
@@ -30,3 +31,19 @@ export const useFeaturesStore = create<UseFeatures>(
 		}
 	)
 );
+
+export const useFeatures = (key: string) => {
+	const url = `features/server/${key}`;
+	const { featuresCache, updateFeaturesCache, clearFeatureCache } = useFeaturesStore();
+	const { data, setLoading, error, loading } = useApi<FeaturePagination>(url, {
+		onSuccess: data => updateFeaturesCache(data as FeaturePagination)
+	});
+	return {
+		data,
+		error,
+		loading,
+		setLoading,
+		featuresCache,
+		clearFeatureCache
+	};
+};

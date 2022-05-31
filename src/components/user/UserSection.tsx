@@ -7,7 +7,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { UserCard } from "@components/user/UserCard";
 import { Loader } from "@components/Loader";
 import { EmptyDataState } from "@components/EmptyDataState";
-import { UserPagination, useUsers } from "@hooks/test/useUsers";
+import { UserPagination, useUsers } from "@hooks/useUsers";
 
 export const UserSection = () => {
 	const { query } = useRouter();

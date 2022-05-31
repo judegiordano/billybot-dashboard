@@ -9,7 +9,7 @@ import { EmptyDataState } from "@components/EmptyDataState";
 import { ShallowUser } from "./ShallowUser";
 import { constants } from "@utils";
 import { Separator } from "@components/Separator";
-import { useLottery } from "@hooks/test/useLottery";
+import { useLottery } from "@hooks/useLottery";
 
 export const LotterySection = () => {
 	const { query } = useRouter();

@@ -1,10 +1,4 @@
-import { create } from "apisauce";
-
-import { NEXT_PUBLIC_BACKEND_API, NEXT_PUBLIC_DISCORD_API, NEXT_PUBLIC_DOMAIN } from "./config";
-
-export const discordApi = create({
-	baseURL: `${NEXT_PUBLIC_DISCORD_API}`
-});
+import { NEXT_PUBLIC_BACKEND_API, NEXT_PUBLIC_DOMAIN } from "./config";
 
 type RequestOptions = {
 	params?: Record<string, string>

@@ -5,10 +5,8 @@ import Checkbox from "@mui/material/Checkbox";
 
 import { Loader } from "@components/Loader";
 import { EmptyDataState } from "@components/EmptyDataState";
-// import { useFeatures } from "@hooks/useFeatures";
-// import type { FeaturePagination } from "@store/useFeatures";
 import { FeatureCard } from "./FeatureCard";
-import { FeaturePagination, useFeatures } from "@hooks/test/useFeatures";
+import { FeaturePagination, useFeatures } from "@hooks/useFeatures";
 
 export const FeaturesSection = () => {
 	const { query } = useRouter();

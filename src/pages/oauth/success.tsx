@@ -6,7 +6,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 import { constants } from "@utils";
 import { AppLink } from "@components/AppLink";
-import { useAuthStore } from "@store/useAuth";
+import { useAuthStore } from "@hooks/useAuth";
 import { ClientConnectionStatus } from "@types";
 
 const success = () => {
