@@ -11,20 +11,20 @@ import { UserSection } from "@components/user/UserSection";
 import { ServerCard } from "@components/server/ServerCard";
 import { ScrollToTop } from "@components/ScrollToTop";
 import { Loader } from "@components/Loader";
-import { useServer } from "@hooks/useServer";
 import { Error } from "@components/Error";
 import { AnnouncementSection } from "@components/announcement/AnnouncementSection";
 import { LotterySection } from "@components/lottery/LotterySection";
 import { FeaturesSection } from "@components/feature/FeaturesSection";
 import { constants } from "@utils";
 import { AuthGate } from "@components/auth/AuthGate";
+import { useServer } from "@hooks/test/useServer";
 
 const Server = () => {
 	const [tabValue, setTabValue] = useState("1");
 	const toggleTab = (_: unknown, newValue: string) => setTabValue(newValue);
 
 	const { query } = useRouter();
-	const { data, isLoading, error } = useServer(query.server_id as string);
+	const { data, loading, error } = useServer(query.server_id as string);
 	const [server, setServer] = useState<IServer>();
 	const [errorState, setErrorState] = useState<string | undefined>();
 
@@ -39,7 +39,7 @@ const Server = () => {
 	}, [data]);
 
 	if (errorState) return <Error message={errorState} />;
-	if (isLoading || !server) return <Loader />;
+	if (loading || !server) return <Loader />;
 
 	return (
 		<AuthGate>

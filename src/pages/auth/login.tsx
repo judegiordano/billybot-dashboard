@@ -45,14 +45,15 @@ export const Login = () => {
 	}
 
 	return (
-		<div className="max-w-[500px] min-h-screen pt-5 pb-5 m-auto px-5 mr-auto text-center">
+		<div className="max-w-[700px] min-h-screen pt-5 pb-5 m-auto px-5 mr-auto text-center">
 			<Card style={{ backgroundColor: constants.THEME.BLACK }}>
 				<CardContent>
 					<div className="pt-5">
 						<Input
+							fullWidth
+							className="text-theme-gray max-w-[250px]"
 							value={body.username}
 							onChange={({ target }) => setBody({ ...body, username: target.value.trim() })}
-							className="text-theme-gray"
 							placeholder="username"
 						/>
 					</div>
@@ -61,7 +62,8 @@ export const Login = () => {
 							type="password"
 							value={body.password}
 							onChange={({ target }) => setBody({ ...body, password: target.value.trim() })}
-							className="text-theme-gray"
+							fullWidth
+							className="text-theme-gray max-w-[250px]"
 							placeholder="password"
 						/>
 					</div>
@@ -72,7 +74,7 @@ export const Login = () => {
 								backgroundColor: formValid ? constants.THEME.PURPLE : "",
 								color: constants.THEME.WHITE
 							}}
-							disabled={isLoading}
+							disabled={!formValid || isLoading}
 							onClick={login}
 							endIcon={<Spinner visible={isLoading} />}
 						>

@@ -164,3 +164,7 @@ export interface IServerMetadata extends IServer {
 
 export type ApiResponse<T> = { data: IApiError & T }
 export type ApiFetchResponse<T> = IApiError & T
+
+export interface IServerInfo extends IServer {
+	user_count: number
+}

@@ -38,21 +38,22 @@ export const Register = () => {
 			await push(`${config.NEXT_PUBLIC_DOMAIN}/user`);
 			setIsLoading(false);
 		} catch (error) {
-			setBody({ email: "",  username: "", password: "" });
+			setBody({ email: "", username: "", password: "" });
 			setIsLoading(false);
 			toast.error(error as string);
 		}
 	}
 
 	return (
-		<div className="max-w-[500px] min-h-screen pt-5 pb-5 m-auto px-5 mr-auto text-center">
+		<div className="max-w-[700px] min-h-screen pt-5 pb-5 m-auto px-5 mr-auto text-center">
 			<Card style={{ backgroundColor: constants.THEME.BLACK }}>
 				<CardContent>
 					<div className="pt-5">
 						<Input
 							value={body.username}
 							onChange={({ target }) => setBody({ ...body, username: target.value.trim() })}
-							className="text-theme-gray"
+							fullWidth
+							className="text-theme-gray max-w-[250px]"
 							placeholder="username"
 						/>
 					</div>
@@ -60,7 +61,8 @@ export const Register = () => {
 						<Input
 							value={body.email}
 							onChange={({ target }) => setBody({ ...body, email: target.value.trim() })}
-							className="text-theme-gray"
+							fullWidth
+							className="text-theme-gray max-w-[250px]"
 							placeholder="email"
 						/>
 					</div>
@@ -69,7 +71,8 @@ export const Register = () => {
 							type="password"
 							value={body.password}
 							onChange={({ target }) => setBody({ ...body, password: target.value.trim() })}
-							className="text-theme-gray"
+							fullWidth
+							className="text-theme-gray max-w-[250px]"
 							placeholder="password"
 						/>
 					</div>

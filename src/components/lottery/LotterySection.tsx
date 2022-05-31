@@ -8,20 +8,20 @@ import { Loader } from "@components/Loader";
 import { EmptyDataState } from "@components/EmptyDataState";
 import { ShallowUser } from "./ShallowUser";
 import { constants } from "@utils";
-import { useLottery } from "@hooks/useLottery";
 import { Separator } from "@components/Separator";
+import { useLottery } from "@hooks/test/useLottery";
 
 export const LotterySection = () => {
 	const { query } = useRouter();
 	const { data } = useLottery(query.server_id as string);
-	const [lottery, setLottery] = useState<ILotteryInfo | undefined>();
+	const [lottery, setLottery] = useState<ILotteryInfo>();
 
 	useEffect(() => {
-		data && setLottery(data);
+		setLottery(data);
 	}, [data]);
 
 	if (!lottery) return <Loader />;
-	if (lottery.entrants.length <= 0) return <EmptyDataState text="no entrants yet" />;
+	if (lottery.entrants.length <= 0) return <EmptyDataState text="no lottery entrants yet" />;
 	return (
 		<>
 			<Card

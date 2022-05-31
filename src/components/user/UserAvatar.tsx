@@ -2,8 +2,7 @@ import React from "react";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
-
-import { IUser } from "@types";
+import { IUser } from "btbot-types";
 
 const buildAvatarUrl = (user: IUser) => {
 	if (!user.avatar_hash) return "/default_profile.png";

@@ -7,8 +7,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { UserCard } from "@components/user/UserCard";
 import { Loader } from "@components/Loader";
 import { EmptyDataState } from "@components/EmptyDataState";
-import { useUsers } from "@hooks/useUsers";
-import type { UserPagination } from "@store/useUsers";
+import { UserPagination, useUsers } from "@hooks/test/useUsers";
 
 export const UserSection = () => {
 	const { query } = useRouter();
@@ -18,9 +17,18 @@ export const UserSection = () => {
 	const [isFool, setIsFool] = useState<boolean | null>(null);
 	const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
 	const [bucks, setBucks] = useState<number>(-1);
-	const key = `${query.server_id}?page=${page}&username=${username}&is_mayor=${isMayor}&is_fool=${isFool}&is_admin=${isAdmin}&billy_bucks=${bucks}`;
-	const { data } = useUsers(key);
-	const [paginatedUsers, setPaginatedUsers] = useState<UserPagination | undefined>();
+
+	const params = new URLSearchParams({
+		page: page.toString(),
+		username,
+		...(isMayor !== null ? { is_mayor: isMayor?.toString() } : null),
+		...(isFool !== null ? { is_fool: isFool?.toString() } : null),
+		...(isAdmin !== null ? { is_admin: isAdmin?.toString() } : null),
+		billy_bucks: bucks.toString()
+	}).toString();
+	const key = `${query.server_id}?${params}`;
+	const { data, loading } = useUsers(key);
+	const [paginatedUsers, setPaginatedUsers] = useState<UserPagination>();
 
 	const changePage = (_: unknown, value: number) => setPage(value);
 	const filteringComponents = [
@@ -31,10 +39,9 @@ export const UserSection = () => {
 	];
 
 	useEffect(() => {
-		data && setPaginatedUsers(data);
+		setPaginatedUsers(data);
 	}, [data]);
 
-	if (!paginatedUsers) return <Loader />;
 	return (
 		<>
 			<TextField
@@ -63,24 +70,29 @@ export const UserSection = () => {
 				}
 			</div>
 			{
-				paginatedUsers.users.length <= 0 && (
-					<EmptyDataState text="no users" />
-				)
+				loading && !paginatedUsers && <Loader />
 			}
 			{
-				paginatedUsers.users.map((user, key) => <UserCard key={key} user={user} index={key} />)
+				paginatedUsers?.users?.length === 0 && !loading && <EmptyDataState text="no users found" />
 			}
-			<div className="mt-5 bg-theme-black">
-				<Pagination
-					color="primary"
-					showFirstButton
-					showLastButton
-					className="flex justify-center pt-5 pb-5"
-					count={paginatedUsers.pages}
-					page={page}
-					onChange={changePage}
-				/>
-			</div>
+			{
+				paginatedUsers?.users.map((user, key) => <UserCard key={key} user={user} index={key} />)
+			}
+			{
+				paginatedUsers && paginatedUsers.users?.length >= 1 && (
+					<div className="mt-5 bg-theme-black">
+						<Pagination
+							color="primary"
+							showFirstButton
+							showLastButton
+							className="flex justify-center pt-5 pb-5"
+							count={paginatedUsers?.pages}
+							page={page}
+							onChange={changePage}
+						/>
+					</div>
+				)
+			}
 		</>
 	);
 };
