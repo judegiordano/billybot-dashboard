@@ -2,9 +2,9 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 
-import { storageEngine } from "@store/engine";
 import type { ILotteryInfo } from "@types";
 import { useApi } from "./useApi";
+import { storage } from "@utils";
 
 export type UseLottery = {
 	lotteryCache: ILotteryInfo | null
@@ -21,7 +21,7 @@ export const useLotteryStore = create<UseLottery>(
 		}),
 		{
 			name: "boytown-dashboard.lottery",
-			getStorage: storageEngine,
+			getStorage: storage.storageEngine,
 			version: 1
 		}
 	)

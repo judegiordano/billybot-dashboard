@@ -3,8 +3,8 @@ import create from "zustand";
 import { persist } from "zustand/middleware";
 import type { IUser } from "btbot-types";
 
-import { storageEngine } from "@store/engine";
 import { useApi } from "./useApi";
+import { storage } from "@utils";
 
 export type UserPagination = {
 	pages: number,
@@ -26,7 +26,7 @@ export const useUsersStore = create<UseUsers>(
 		}),
 		{
 			name: "boytown-dashboard.users",
-			getStorage: storageEngine,
+			getStorage: storage.storageEngine,
 			version: 1
 		}
 	)

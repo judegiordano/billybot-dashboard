@@ -6,8 +6,7 @@ import toast from "react-hot-toast";
 import useSWR from "swr";
 import { ClientConnectionStatus, IClient } from "btbot-types";
 
-import { nextBackend } from "@utils";
-import { storageEngine } from "@store/engine";
+import { nextBackend, storage } from "@utils";
 
 export interface IAuthUser {
 	email?: string
@@ -39,7 +38,7 @@ export const useAuthStore = create<UseAuthUser>(
 		}),
 		{
 			name: "boytown-dashboard.auth-user",
-			getStorage: storageEngine,
+			getStorage: storage.storageEngine,
 			version: 1
 		}
 	)

@@ -1,9 +1,9 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 
-import { storageEngine } from "@store/engine";
 import type { IServerInfo } from "@types";
 import { useApi } from "./useApi";
+import { storage } from "@utils";
 
 export type UseServerInfo = {
 	serverInfoCache: Partial<IServerInfo> | null
@@ -23,7 +23,7 @@ export const useServerInfoStore = create<UseServerInfo>(
 		}),
 		{
 			name: "boytown-dashboard.server-info",
-			getStorage: storageEngine,
+			getStorage: storage.storageEngine,
 			version: 1
 		}
 	)

@@ -1,6 +1,6 @@
 export * as config from "./config";
 export * as constants from "./constants";
-export * as cookie from "./cookie";
+export * as storage from "./storage";
 export { nextBackend, backendApi } from "./rest";
 
 const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;

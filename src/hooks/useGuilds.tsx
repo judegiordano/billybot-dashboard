@@ -6,8 +6,7 @@ import useSWR from "swr";
 import toast from "react-hot-toast";
 import { ClientConnectionStatus, IServer } from "btbot-types";
 
-import { storageEngine } from "@store/engine";
-import { nextBackend } from "@utils";
+import { nextBackend, storage } from "@utils";
 import { useAuthStore } from "./useAuth";
 
 export type UseGuilds = {
@@ -25,7 +24,7 @@ export const useGuildsStore = create<UseGuilds>(
 		}),
 		{
 			name: "boytown-dashboard.auth-guilds",
-			getStorage: storageEngine,
+			getStorage: storage.storageEngine,
 			version: 1
 		}
 	)

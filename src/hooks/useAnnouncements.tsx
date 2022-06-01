@@ -3,8 +3,8 @@ import create from "zustand";
 import { persist } from "zustand/middleware";
 import type { IAnnouncement } from "btbot-types";
 
-import { storageEngine } from "@store/engine";
 import { useApi } from "./useApi";
+import { storage } from "@utils";
 
 export type AnnouncementPagination = {
 	pages: number,
@@ -26,7 +26,7 @@ export const useAnnouncementsStore = create<UseAnnouncements>(
 		}),
 		{
 			name: "boytown-dashboard.announcements",
-			getStorage: storageEngine,
+			getStorage: storage.storageEngine,
 			version: 1
 		}
 	)

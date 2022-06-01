@@ -3,8 +3,8 @@ import create from "zustand";
 import { persist } from "zustand/middleware";
 import type { IFeature } from "btbot-types";
 
-import { storageEngine } from "@store/engine";
 import { useApi } from "./useApi";
+import { storage } from "@utils";
 
 export type FeaturePagination = {
 	pages: number,
@@ -26,7 +26,7 @@ export const useFeaturesStore = create<UseFeatures>(
 		}),
 		{
 			name: "boytown-dashboard.features",
-			getStorage: storageEngine,
+			getStorage: storage.storageEngine,
 			version: 1
 		}
 	)
