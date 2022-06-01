@@ -3,7 +3,7 @@ import { useState } from "react";
 import useSWR from "swr";
 import toast from "react-hot-toast";
 
-import { backendApi } from "@utils";
+import { nextBackend } from "@utils";
 
 export type UseApiConfig<T> = {
 	refreshInterval?: number
@@ -16,7 +16,7 @@ export function useApi<T>(url: string, options?: UseApiConfig<T>) {
 	const [loading, setLoading] = useState<boolean>(true);
 
 	async function fetcher<T>(url: string) {
-		const data = await backendApi.get<T>(url);
+		const data = await nextBackend.get<T>(url);
 		setLoading(false);
 		return data;
 	}

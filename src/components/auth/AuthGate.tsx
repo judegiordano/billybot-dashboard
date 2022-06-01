@@ -35,7 +35,7 @@ export const UserAvatar = ({ auth_state }: { auth_state?: IAuthUser["auth_state"
 	};
 	async function connectAccount() {
 		try {
-			const data = await nextBackend.get<{ redirect_url: string }>("oauth");
+			const data = await nextBackend.get<{ redirect_url: string }>("clients/oauth");
 			await push(data.redirect_url);
 			return;
 		} catch (error) {
@@ -44,7 +44,7 @@ export const UserAvatar = ({ auth_state }: { auth_state?: IAuthUser["auth_state"
 	}
 	async function logout() {
 		try {
-			await nextBackend.post("logout");
+			await nextBackend.post("clients/logout");
 			clearAuthCache();
 			await push(`${config.NEXT_PUBLIC_DOMAIN}/auth/login`);
 		} catch (error) {

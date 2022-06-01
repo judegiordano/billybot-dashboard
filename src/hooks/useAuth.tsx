@@ -56,23 +56,14 @@ export function useAuth() {
 				console.log("no client connected");
 				return;
 			}
-			const data = await nextBackend.post<IClient>(`oauth/${key}`);
-			updateAuthCache({
-				...authCache,
-				email: data.email,
-				username: data.username,
-				auth_state: {
-					user_id: data?.auth_state?.user_id,
-					username: data?.auth_state?.username,
-					discriminator: data?.auth_state?.discriminator,
-					avatar: data?.auth_state?.avatar
-				}
-			});
+			const client = await nextBackend.post<IClient>(key);
+			updateAuthCache({ ...authCache, ...client });
 		} catch (error) {
 			toast.error(error as string);
 		}
 	}
-	const { data, error } = useSWR("refresh", () => fetcher("refresh"), {
+
+	const { data, error } = useSWR("clients/refresh/client", () => fetcher("clients/refresh/client"), {
 		refreshInterval: 60_000,
 		onSuccess: () => setLoading(true),
 		onError: () => setLoading(false)

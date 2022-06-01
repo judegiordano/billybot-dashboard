@@ -50,7 +50,7 @@ export function useGuilds() {
 		}
 	}
 
-	const { data, error } = useSWR("guilds", () => fetcher<IServer[]>("guilds"), {
+	const { data, error } = useSWR("clients/guilds", () => fetcher<IServer[]>("clients/guilds"), {
 		refreshInterval: 60_000,
 		onSuccess: data => {
 			updateGuildsCache(data as IServer[]);

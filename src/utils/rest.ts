@@ -1,4 +1,4 @@
-import { NEXT_PUBLIC_BACKEND_API, NEXT_PUBLIC_DOMAIN } from "./config";
+import { BACKEND_API, NEXT_PUBLIC_DOMAIN } from "./config";
 
 type RequestOptions = {
 	params?: Record<string, string>
@@ -54,7 +54,7 @@ export class RestApi {
 				...options?.headers
 			},
 			credentials: options?.credentials,
-			body: JSON.stringify(options?.body)
+			body: JSON.stringify(options?.body ?? {})
 		});
 		if (response.redirected) window.location.href = response.url;
 		const data = await response.json() as FetchError;
@@ -66,4 +66,4 @@ export class RestApi {
 }
 
 export const nextBackend = new RestApi(`${NEXT_PUBLIC_DOMAIN}/api`);
-export const backendApi = new RestApi(NEXT_PUBLIC_BACKEND_API);
+export const backendApi = new RestApi(BACKEND_API);

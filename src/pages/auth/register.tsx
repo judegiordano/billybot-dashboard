@@ -27,14 +27,8 @@ export const Register = () => {
 	async function login() {
 		try {
 			setIsLoading(true);
-			const client = await nextBackend.post<IClient>("register", { body });
-			updateAuthCache({
-				...authCache,
-				username: client.username,
-				email: client.email,
-				connection_status: client.connection_status,
-				auth_state: client.auth_state
-			});
+			const client = await nextBackend.post<IClient>("clients/register", { body });
+			updateAuthCache({ ...authCache, ...client });
 			await push(`${config.NEXT_PUBLIC_DOMAIN}/user`);
 			setIsLoading(false);
 		} catch (error) {
