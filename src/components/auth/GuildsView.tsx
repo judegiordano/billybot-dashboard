@@ -23,10 +23,7 @@ export const GuildsView = ({ server }: IGuildsViewProps) => {
 					/>
 				</Tooltip>
 			</div>
-			<AppLink
-				target="_blank"
-				href={`${config.NEXT_PUBLIC_DOMAIN}/user/server/${server.server_id}`}
-			>
+			<AppLink href={`${config.NEXT_PUBLIC_DOMAIN}/user/server/${server.server_id}`} >
 				{server.name}
 			</AppLink>
 			<div className="pt-2">
