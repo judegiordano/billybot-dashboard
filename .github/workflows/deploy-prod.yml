@@ -21,17 +21,19 @@ jobs:
 
       - run: yarn install --frozen-lockfile
 
-      - run: "vercel pull --token ${{ secrets.VERCEL_TOKEN }} --yes"
+      # - run: "vercel pull --token ${{ secrets.VERCEL_TOKEN }} --yes"
 
       - run: yarn lint
 
       - run: yarn build
+
+      # - run: "vercel build --cwd --token ${{ secrets.VERCEL_TOKEN }}"
 
       - uses: UnlyEd/github-action-deploy-on-vercel@latest
 
         with:
           command: |
             "vercel ./ --confirm --prod --token ${{ secrets.VERCEL_TOKEN }}"
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          BACKEND_API: ${{ secrets.BACKEND_API }}
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      BACKEND_API: ${{ secrets.BACKEND_API }}
