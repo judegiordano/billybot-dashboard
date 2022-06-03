@@ -21,7 +21,7 @@ jobs:
 
       - run: yarn install --frozen-lockfile
 
-      - run: "vercel pull --token ${{ secrets.VERCEL_TOKEN }}"
+      - run: "vercel pull --token ${{ secrets.VERCEL_TOKEN }} --yes"
 
       - run: yarn lint
 
