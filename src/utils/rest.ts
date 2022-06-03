@@ -59,7 +59,9 @@ export class RestApi {
 		if (response.redirected) window.location.href = response.url;
 		const data = await response.json() as FetchError;
 		if (!response.ok) {
-			throw data.error ?? "internal server error";
+			if (typeof data.error === "string")
+				throw data.error ?? "internal server error";
+			throw "internal server error";
 		}
 		return data as T;
 	}

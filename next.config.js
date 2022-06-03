@@ -1,5 +1,5 @@
 module.exports = {
-	swcMinify: true,
+	swcMinify: false,
 	reactStrictMode: true,
 	trailingSlash: false,
 	poweredByHeader: false,
