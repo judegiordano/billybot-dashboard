@@ -1,8 +1,8 @@
 import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import type { IUser } from "btbot-types";
 
-import type { IUser } from "@types";
 import { constants } from "@utils";
 import { Badge } from "@components/Badge";
 import { AppIcon } from "@components/AppIcon";
@@ -11,9 +11,9 @@ interface IShallowUserProps {
 	user: Pick<IUser, "username">
 }
 
-export const ShallowUser: React.FC<IShallowUserProps> = ({
+export const ShallowUser = ({
 	user
-}: IShallowUserProps): JSX.Element => {
+}: IShallowUserProps) => {
 	return (
 		<Card
 			className="mt-5 font-medium"

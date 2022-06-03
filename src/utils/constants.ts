@@ -6,5 +6,6 @@ export const THEME = {
 	BLUE: "#3b82f6",
 	GREEN: "#57F287",
 	YELLOW: "#FEE75C",
-	RED: "#ef4444"
+	RED: "#ef4444",
+	WHITE: "#ffffff"
 };

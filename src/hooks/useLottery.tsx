@@ -2,10 +2,11 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 
-import { storageEngine } from "./engine";
 import type { ILotteryInfo } from "@types";
+import { useApi } from "./useApi";
+import { storage } from "@utils";
 
-type UseLottery = {
+export type UseLottery = {
 	lotteryCache: ILotteryInfo | null
 	updateLotteryCache: (l: ILotteryInfo) => void
 	clearLotteryCache: () => void
@@ -20,8 +21,24 @@ export const useLotteryStore = create<UseLottery>(
 		}),
 		{
 			name: "boytown-dashboard.lottery",
-			getStorage: storageEngine,
+			getStorage: storage.storageEngine,
 			version: 1
 		}
 	)
 );
+
+export const useLottery = (key: string) => {
+	const url = `lottery/server/${key}`;
+	const { clearLotteryCache, lotteryCache, updateLotteryCache } = useLotteryStore();
+	const { data, setLoading, error, loading } = useApi<ILotteryInfo>(url, {
+		onSuccess: data => updateLotteryCache(data as ILotteryInfo)
+	});
+	return {
+		data,
+		error,
+		loading,
+		setLoading,
+		lotteryCache,
+		clearLotteryCache
+	};
+};

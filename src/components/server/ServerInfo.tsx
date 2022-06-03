@@ -1,12 +1,8 @@
 import React from "react";
 
-import type { IServer } from "@types";
+import type { IServerInfo } from "@types";
 
-export const ServerInfo = ({
-	server
-}: {
-	server: IServer
-}) => {
+export const ServerInfo = ({ server }: { server: IServerInfo }) => {
 	const { settings } = server;
 	return (
 		<div className="pt-2 text-theme-gray font-content">

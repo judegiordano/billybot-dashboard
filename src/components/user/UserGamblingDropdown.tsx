@@ -3,9 +3,8 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { CardSuit, ICard, IGamblingMetrics } from "btbot-types";
 
-import type { ICard, IGamblingMetrics } from "@types";
-import { CardSuit } from "@types";
 import { constants } from "@utils";
 import { Separator } from "@components/Separator";
 

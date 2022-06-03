@@ -2,7 +2,7 @@ import React from "react";
 import { readableDate, readableTime } from "@utils";
 
 interface ITimestampProps {
-	date: Date
+	date: Date | string
 }
 
 export const TimeStamp = ({ date }: ITimestampProps) => {

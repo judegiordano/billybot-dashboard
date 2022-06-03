@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
-import type { IServer } from "@types";
 import { ServerIcon } from "./ServerIcon";
 import { ServerInfo } from "./ServerInfo";
 import { constants } from "@utils";
 import { Loader } from "@components/Loader";
-import { useServerInfoStore } from "@store/useServerInfo";
 import { Separator } from "@components/Separator";
+import { useServerInfoStore } from "@hooks/useServer";
+import type { IServerInfo } from "@types";
 
 export const ServerCard = () => {
 	const { serverInfoCache } = useServerInfoStore();
-	const [server, setServer] = useState<IServer>();
+	const [server, setServer] = useState<IServerInfo | null>();
 
 	useEffect(() => {
-		serverInfoCache && setServer(serverInfoCache);
+		setServer(serverInfoCache as IServerInfo);
 	}, [serverInfoCache]);
 
 	if (!server) {

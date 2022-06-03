@@ -1,8 +1,8 @@
 import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import type { IUser } from "btbot-types";
 
-import type { IUser } from "@types";
 import { constants } from "@utils";
 import { UserAvatar } from "./UserAvatar";
 import { Badge } from "@components/Badge";

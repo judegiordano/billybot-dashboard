@@ -10,10 +10,27 @@ module.exports = {
 	},
 	webpack(config) {
 		config.module.rules.push({
-		  test: /\.svg$/,
-		  use: ["@svgr/webpack"]
+			test: /\.svg$/,
+			use: ["@svgr/webpack"]
 		});
-	
 		return config;
-	}
+	},
+	async redirects() {
+		return [
+			{
+				source: "/",
+				destination: "/user",
+				permanent: false,
+			},
+		];
+	},
+	async rewrites() {
+		return [
+			{
+				source: "/api/:path*",
+				destination: `${process.env.BACKEND_API}/:path*`
+			},
+		];
+	},
+
 };

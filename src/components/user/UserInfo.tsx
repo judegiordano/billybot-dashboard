@@ -1,7 +1,6 @@
 import React from "react";
 import Tooltip from "@mui/material/Tooltip";
-
-import type { IUser } from "@types";
+import type { IUser } from "btbot-types";
 
 const buildBuckColor = (bucks: number) => {
 	if (bucks >= 501) return "text-theme-green";
