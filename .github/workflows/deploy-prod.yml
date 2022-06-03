@@ -21,6 +21,8 @@ jobs:
 
       - run: yarn install --frozen-lockfile
 
+      - run: vercel pull
+
       - run: yarn lint
 
       - run: yarn build
