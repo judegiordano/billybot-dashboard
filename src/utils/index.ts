@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import toast from "react-hot-toast";
+
 export * as config from "./config";
 export * as constants from "./constants";
 export * as storage from "./storage";
@@ -21,4 +24,15 @@ export const readableTime = (dateIso: string) => {
 		minute: "numeric",
 		timeZone
 	}).format(new Date(dateIso));
+};
+
+export const errorHandler = (error: any) => {
+	console.log({ error });
+	if (typeof error === "string")
+		return toast.error(error);
+	if (typeof error === "object" && error?.message)
+		if (typeof error?.message === "string") {
+			return toast.error(error?.message as string);
+		}
+	toast.error(String(error).toString());
 };

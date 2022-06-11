@@ -76,7 +76,7 @@ export const UserSection = () => {
 				paginatedUsers?.users?.length === 0 && !loading && <EmptyDataState text="no users found" />
 			}
 			{
-				paginatedUsers?.users.map((user, key) => <UserCard key={key} user={user} index={key} />)
+				paginatedUsers?.users.map((user, key) => <UserCard key={key} user={user} />)
 			}
 			{
 				paginatedUsers && paginatedUsers.users?.length >= 1 && (

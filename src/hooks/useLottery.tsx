@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import create from "zustand";
 import { persist } from "zustand/middleware";
 
 import type { ILotteryInfo } from "@types";
 import { useApi } from "./useApi";
-import { storage } from "@utils";
+import { config, storage } from "@utils";
 
 export type UseLottery = {
 	lotteryCache: ILotteryInfo | null
@@ -16,11 +15,14 @@ export const useLotteryStore = create<UseLottery>(
 	persist(
 		(set, get) => ({
 			lotteryCache: null,
-			updateLotteryCache: (lotteryCache: ILotteryInfo) => set({ lotteryCache }),
+			updateLotteryCache: (updates: ILotteryInfo) => {
+				const { lotteryCache } = get();
+				set({ lotteryCache: { ...lotteryCache, ...updates } });
+			},
 			clearLotteryCache: () => set({ lotteryCache: null })
 		}),
 		{
-			name: "boytown-dashboard.lottery",
+			name: `${config.NEXT_PUBLIC_STORE}.lottery`,
 			getStorage: storage.storageEngine,
 			version: 1
 		}

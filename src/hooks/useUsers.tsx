@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import type { IUser } from "btbot-types";
 
 import { useApi } from "./useApi";
-import { storage } from "@utils";
+import { config, storage } from "@utils";
 
 export type UserPagination = {
 	pages: number,
@@ -21,11 +20,14 @@ export const useUsersStore = create<UseUsers>(
 	persist(
 		(set, get) => ({
 			userCache: { pages: 0, users: [] },
-			updateUserCache: (userCache: UserPagination) => set({ userCache }),
+			updateUserCache: (updates: UserPagination) => {
+				const { userCache } = get();
+				set({ userCache: { ...userCache, ...updates } });
+			},
 			clearUserCache: () => set({ userCache: { pages: 0, users: [] } })
 		}),
 		{
-			name: "boytown-dashboard.users",
+			name: `${config.NEXT_PUBLIC_STORE}.users`,
 			getStorage: storage.storageEngine,
 			version: 1
 		}

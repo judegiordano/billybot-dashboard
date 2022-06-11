@@ -8,9 +8,36 @@ import { useServer } from "@hooks/useServer";
 import { ScrollToTop } from "@components/ScrollToTop";
 import { AuthGate } from "@components/auth/AuthGate";
 import { ServerCard } from "@components/server/ServerCard";
-import { ServerDataTabulation } from "@components/ServerDataTabulation";
+import { AppLink } from "@components/AppLink";
+import { Separator } from "@components/Separator";
 
-const Server = ({ server_id }: { server_id: string }) => {
+const links = [
+	{ text: "server members", link: "members" },
+	{ text: "lottery information", link: "lottery" },
+	{ text: "feature requests", link: "features" },
+	{ text: "announcements log", link: "announcements" }
+];
+
+const LinkBuilder = ({ server_id }: { server_id: string }) => {
+	return (
+		<>
+			{
+				links.map(({ text, link }, index) => (
+					<>
+						<div className="pt-2 pl-2 text-lg font-bold">
+							<AppLink key={index} href={`${config.NEXT_PUBLIC_DOMAIN}/user/server/${server_id}/${link}`} >
+								{text}
+							</AppLink>
+							<Separator />
+						</div>
+					</>
+				))
+			}
+		</>
+	);
+};
+
+const index = ({ server_id }: { server_id: string }) => {
 	const { data, loading } = useServer(server_id);
 	const [server, setServer] = useState<IServerInfo | undefined>();
 
@@ -29,7 +56,7 @@ const Server = ({ server_id }: { server_id: string }) => {
 				server && (
 					<div className="min-h-screen m-auto max-w-[750px] mr-auto text-theme-gray">
 						<ServerCard />
-						<ServerDataTabulation />
+						<LinkBuilder server_id={server.server_id} />
 					</div>
 				)
 			}
@@ -54,4 +81,4 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 	};
 }
 
-export default Server;
+export default index;

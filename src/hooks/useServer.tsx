@@ -3,7 +3,7 @@ import { persist } from "zustand/middleware";
 
 import type { IServerInfo } from "@types";
 import { useApi } from "./useApi";
-import { storage } from "@utils";
+import { config, storage } from "@utils";
 
 export type UseServerInfo = {
 	serverInfoCache: Partial<IServerInfo> | null
@@ -22,7 +22,7 @@ export const useServerInfoStore = create<UseServerInfo>(
 			clearServerInfoCache: () => set({ serverInfoCache: null })
 		}),
 		{
-			name: "boytown-dashboard.server-info",
+			name: `${config.NEXT_PUBLIC_STORE}.server-info`,
 			getStorage: storage.storageEngine,
 			version: 1
 		}
