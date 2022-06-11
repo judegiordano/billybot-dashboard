@@ -15,10 +15,9 @@ import { UserLotteryDropdown } from "./UserLotteryDropdown";
 
 interface IUserCardProps {
 	user: IUser
-	index: number
 }
 
-export const UserCard = ({ user, index }: IUserCardProps) => {
+export const UserCard = ({ user }: IUserCardProps) => {
 	const badges = [
 		{
 			show: user.is_admin,
@@ -38,12 +37,12 @@ export const UserCard = ({ user, index }: IUserCardProps) => {
 			alt: "fool",
 			icon: <AppIcon type="jester" />
 		},
-		{
-			show: index < 3,
-			tooltip: `${user.username} is a server noblemen`,
-			alt: "noblemen",
-			icon: <AppIcon type="money" color={constants.THEME.GREEN} />
-		},
+		// {
+		// 	show: index < 3,
+		// 	tooltip: `${user.username} is a server noblemen`,
+		// 	alt: "noblemen",
+		// 	icon: <AppIcon type="money" color={constants.THEME.GREEN} />
+		// },
 		{
 			show: user.has_lottery_ticket,
 			tooltip: `${user.username} has purchased this weeks lottery ticket`,

@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import type { IAnnouncement } from "btbot-types";
 
 import { useApi } from "./useApi";
-import { storage } from "@utils";
+import { config, storage } from "@utils";
 
 export type AnnouncementPagination = {
 	pages: number,
@@ -21,11 +20,14 @@ export const useAnnouncementsStore = create<UseAnnouncements>(
 	persist(
 		(set, get) => ({
 			announcementsCache: { pages: 0, announcements: [] },
-			updateAnnouncementsCache: (announcementsCache: AnnouncementPagination) => set({ announcementsCache }),
+			updateAnnouncementsCache: (updates: AnnouncementPagination) => {
+				const { announcementsCache } = get();
+				set({ announcementsCache: { ...announcementsCache, ...updates } });
+			},
 			clearAnnouncementCache: () => set({ announcementsCache: { pages: 0, announcements: [] } })
 		}),
 		{
-			name: "boytown-dashboard.announcements",
+			name: `${config.NEXT_PUBLIC_STORE}.announcements`,
 			getStorage: storage.storageEngine,
 			version: 1
 		}

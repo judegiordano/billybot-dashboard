@@ -1,12 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import useSWR from "swr";
-import toast from "react-hot-toast";
 import { ClientConnectionStatus, IServer } from "btbot-types";
 
-import { nextBackend, storage } from "@utils";
+import { config, errorHandler, nextBackend, storage } from "@utils";
 import { useAuthStore } from "./useAuth";
 
 export type UseGuilds = {
@@ -19,11 +17,14 @@ export const useGuildsStore = create<UseGuilds>(
 	persist(
 		(set, get) => ({
 			guildsCache: null,
-			updateGuildsCache: (guildsCache: IServer[]) => set({ guildsCache }),
+			updateGuildsCache: (updates: IServer[]) => {
+				const { guildsCache } = get();
+				set({ guildsCache: { ...guildsCache, ...updates } });
+			},
 			clearGuildsCache: () => set({ guildsCache: null })
 		}),
 		{
-			name: "boytown-dashboard.auth-guilds",
+			name: `${config.NEXT_PUBLIC_STORE}.auth-guilds`,
 			getStorage: storage.storageEngine,
 			version: 1
 		}
@@ -44,8 +45,8 @@ export function useGuilds() {
 			const data = await nextBackend.get<T>(key);
 			return data;
 		} catch (error) {
-			toast.error(error as string);
 			setLoading(false);
+			errorHandler(error);
 		}
 	}
 

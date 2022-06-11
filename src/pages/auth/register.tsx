@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import toast from "react-hot-toast";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -8,7 +7,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Input from "@mui/material/Input";
 import type { IClient } from "btbot-types";
 
-import { config, constants, nextBackend } from "@utils";
+import { config, constants, errorHandler, nextBackend } from "@utils";
 import { useAuthStore } from "@hooks/useAuth";
 import { AppLink } from "@components/AppLink";
 
@@ -34,7 +33,7 @@ export const Register = () => {
 		} catch (error) {
 			setBody({ email: "", username: "", password: "" });
 			setIsLoading(false);
-			toast.error(error as string);
+			errorHandler(error);
 		}
 	}
 

@@ -1,12 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import create from "zustand";
 import { persist } from "zustand/middleware";
-import toast from "react-hot-toast";
 import useSWR from "swr";
 import { ClientConnectionStatus, IClient } from "btbot-types";
 
-import { nextBackend, storage } from "@utils";
+import { config, errorHandler, nextBackend, storage } from "@utils";
 
 export interface IAuthUser {
 	email?: string
@@ -17,6 +15,7 @@ export interface IAuthUser {
 		discriminator?: string
 		user_id?: string
 		username?: string
+		registered_servers?: string[]
 	}
 }
 
@@ -37,7 +36,7 @@ export const useAuthStore = create<UseAuthUser>(
 			clearAuthCache: () => set({ authCache: null })
 		}),
 		{
-			name: "boytown-dashboard.auth-user",
+			name: `${config.NEXT_PUBLIC_STORE}.auth-user`,
 			getStorage: storage.storageEngine,
 			version: 1
 		}
@@ -58,13 +57,13 @@ export function useAuth() {
 			const client = await nextBackend.post<IClient>(key);
 			updateAuthCache({ ...authCache, ...client });
 		} catch (error) {
-			toast.error(error as string);
+			errorHandler(error);
 		}
 	}
 
 	const { data, error } = useSWR("clients/refresh/client", () => fetcher("clients/refresh/client"), {
 		refreshInterval: 60_000,
-		onSuccess: () => setLoading(true),
+		onSuccess: () => setLoading(false),
 		onError: () => setLoading(false)
 	});
 	return {

@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import useSWR from "swr";
-import toast from "react-hot-toast";
 
-import { nextBackend } from "@utils";
+import { errorHandler, nextBackend } from "@utils";
 
 export type UseApiConfig<T> = {
 	refreshInterval?: number
@@ -25,7 +24,7 @@ export function useApi<T>(url: string, options?: UseApiConfig<T>) {
 		refreshInterval: 10_000,
 		onSuccess: () => setLoading(false),
 		onError: (error) => {
-			toast.error(error);
+			errorHandler(error);
 			setLoading(false);
 		},
 		...options

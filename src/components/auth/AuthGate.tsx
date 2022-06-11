@@ -3,12 +3,11 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import toast from "react-hot-toast";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 
-import { config, nextBackend } from "@utils";
+import { config, errorHandler, nextBackend } from "@utils";
 import { useAuth, useAuthStore, IAuthUser } from "@hooks/useAuth";
 
 interface IAuthGateProps {
@@ -39,7 +38,7 @@ export const UserAvatar = ({ auth_state }: { auth_state?: IAuthUser["auth_state"
 			await push(data.redirect_url);
 			return;
 		} catch (error) {
-			toast.error(error as string);
+			errorHandler(error);
 		}
 	}
 	async function logout() {
@@ -48,7 +47,7 @@ export const UserAvatar = ({ auth_state }: { auth_state?: IAuthUser["auth_state"
 			clearAuthCache();
 			await push(`${config.NEXT_PUBLIC_DOMAIN}/auth/login`);
 		} catch (error) {
-			toast.error(error as string);
+			errorHandler(error);
 		}
 	}
 	async function home() {
@@ -60,11 +59,13 @@ export const UserAvatar = ({ auth_state }: { auth_state?: IAuthUser["auth_state"
 		<Toolbar>
 			<div className="inline-flex align-middle">
 				<Tooltip title={title}>
-					<IconButton onClick={handleMenu} >
+					<IconButton onClick={handleMenu}>
 						<Image
+							draggable={false}
+							alt="profile-image"
 							className="rounded-full"
-							width={50}
-							height={50}
+							width={56}
+							height={56}
 							src={buildAvatarUrl(auth_state?.user_id, auth_state?.avatar)}
 						/>
 					</IconButton>
