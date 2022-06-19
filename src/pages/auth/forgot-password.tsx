@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CircularProgress from "@mui/material/CircularProgress";
 import Input from "@mui/material/Input";
-import type { IClient } from "btbot-types";
+import Alert from "@mui/material/Alert";
 
-import { config, constants, errorHandler, nextBackend } from "@utils";
-import { useAuthStore } from "@hooks/useAuth";
+import { constants, errorHandler, nextBackend } from "@utils";
 import { AppLink } from "@components/AppLink";
 
 const Spinner = ({ visible }: { visible: boolean }) => {
@@ -16,22 +14,21 @@ const Spinner = ({ visible }: { visible: boolean }) => {
 	return <CircularProgress size={20} style={{ color: constants.THEME.WHITE }} />;
 };
 
-export const Login = () => {
-	const { push } = useRouter();
-	const { authCache, updateAuthCache } = useAuthStore();
+export const ForgotPassword = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [body, setBody] = useState({ username: "", password: "" });
-	const formValid = body.username.length > 0 && body.password.length > 0;
+	const [body, setBody] = useState({ username: "", email: "" });
+	const [success, setSuccess] = useState(false);
+	const formValid = body.username.length > 0 && body.email.length > 0;
 
-	async function login() {
+	async function ResetPassword() {
 		try {
 			setIsLoading(true);
-			const client = await nextBackend.post<IClient>("clients/login", { body });
-			updateAuthCache({ ...authCache, ...client });
-			await push(`${config.NEXT_PUBLIC_DOMAIN}/user`);
+			await nextBackend.post<{ ok: boolean }>("clients/password-reset", { body });
+			setBody({ username: "", email: "" });
+			setSuccess(true);
 			setIsLoading(false);
 		} catch (error) {
-			setBody({ username: "", password: "" });
+			setBody({ username: "", email: "" });
 			setIsLoading(false);
 			errorHandler(error);
 		}
@@ -52,12 +49,12 @@ export const Login = () => {
 					</div>
 					<div className="pt-5">
 						<Input
-							type="password"
-							value={body.password}
-							onChange={({ target }) => setBody({ ...body, password: target.value.trim() })}
+							type="email"
+							value={body.email}
+							onChange={({ target }) => setBody({ ...body, email: target.value.trim() })}
 							fullWidth
 							className="text-theme-gray max-w-[250px]"
-							placeholder="password"
+							placeholder="email"
 						/>
 					</div>
 					<div className="pt-5">
@@ -68,22 +65,27 @@ export const Login = () => {
 								color: constants.THEME.WHITE
 							}}
 							disabled={!formValid || isLoading}
-							onClick={login}
+							onClick={ResetPassword}
 							endIcon={<Spinner visible={isLoading} />}
 						>
-							login
+							Send Recovery Email
 						</Button>
 					</div>
 					<div className="pt-5">
-						<AppLink href="/auth/register">SIGN UP</AppLink>
-					</div>
-					<div className="pt-5">
-						<AppLink href="/auth/forgot-password">FORGOT PASSWORD</AppLink>
+						<AppLink href="/auth/login">LOGIN</AppLink>
 					</div>
 				</CardContent>
 			</Card>
+			{
+				success && (
+					<Alert style={{ background: constants.THEME.GREEN }}
+						severity="success">
+						Password reset email sent! Please check your inbox or spam.
+					</Alert>
+				)
+			}
 		</div>
 	);
 };
 
-export default Login;
+export default ForgotPassword;
