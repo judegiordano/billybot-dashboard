@@ -1193,10 +1193,10 @@ browserslist@^4.20.2:
     node-releases "^2.0.2"
     picocolors "^1.0.0"
 
-btbot-types@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/btbot-types/-/btbot-types-1.6.1.tgz#76296a0a952064b57d1ab59f84c9cf50ae7a63ee"
-  integrity sha512-aypNVeFt0r5oGH+2wt1oFMz/KxOdBLLFayqlYiJxvqfIwOSizEsXmdmXfcbP1XhZBoKexsEqGH1z6Re3lsotIQ==
+btbot-types@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/btbot-types/-/btbot-types-1.8.1.tgz#430e578f341f38c13f39d7c0aa71c5e38e91a6c2"
+  integrity sha512-NDr8Tw/TZF4WJpbErC+HrplFt1ambvgubL+wTrhlf5X4I9MmvIQKX+g8hcK+naZfpvyLaA/Ik3Or/2GXIt4L2Q==
 
 buffer-from@^1.0.0:
   version "1.1.2"

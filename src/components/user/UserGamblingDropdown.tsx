@@ -133,10 +133,45 @@ const BuildLastHand = ({ hand }: { hand?: ICard[] }) => {
 	);
 };
 
+const BuildConnectFourAverages = ({ connect_four }: { connect_four: IGamblingMetrics["connect_four"] }) => {
+	return (
+		<>
+			{
+				connect_four.games > 0 && (
+					<div>
+						<Separator />
+						<div className="text-sm font-bold text-theme-gray">
+							average win rate: <span
+								className="text-theme-green"
+							>
+								%{((connect_four.wins / connect_four.games) * 100).toFixed(2)}
+							</span>
+						</div>
+						<div className="text-sm font-bold text-theme-gray">
+							average loss rate: <span
+								className="text-theme-red"
+							>
+								%{((connect_four.losses / connect_four.games) * 100).toFixed(2)}
+							</span>
+						</div>
+						<div className="text-sm font-bold text-theme-gray">
+							average draw rate: <span
+								className="text-theme-red"
+							>
+								%{((connect_four.draws / connect_four.games) * 100).toFixed(2)}
+							</span>
+						</div>
+					</div>
+				)
+			}
+		</>
+	);
+};
+
 export const UserGamblingDropdown: React.FC<IUserGamblingDropdownProps> = ({
 	gambling
 }: IUserGamblingDropdownProps): JSX.Element => {
-	const { roulette, blackjack } = gambling;
+	const { roulette, blackjack, connect_four } = gambling;
 	return (
 		<div className="pt-2 text-theme-gray">
 			<Accordion className="max-w-[400px]" style={{ backgroundColor: constants.THEME.DARK_BLACK }}>
@@ -188,6 +223,29 @@ export const UserGamblingDropdown: React.FC<IUserGamblingDropdownProps> = ({
 								))
 							}
 							<BuildRouletteAverages roulette={gambling.roulette} />
+						</AccordionDetails>
+					</Accordion>
+					<Separator />
+					<Accordion className="max-w-[400px]" style={{ backgroundColor: constants.THEME.DARK_BLACK }}>
+						<AccordionSummary expandIcon={<ExpandMoreIcon className="text-theme-gray" />} >
+							<div className="text-theme-gray">
+								connect four
+							</div>
+						</AccordionSummary>
+						<Separator />
+						<AccordionDetails>
+							{
+								Object.keys(connect_four).map((key, index) => (
+									<div key={index} className="text-sm font-bold text-theme-gray">
+										{key.replace(/_/gmi, " ")}: <span
+											className={`text-theme-${/los/gmi.test(key) ? "red" : "green"}`}
+										>
+											{connect_four[key as keyof typeof connect_four]}
+										</span>
+									</div>
+								))
+							}
+							<BuildConnectFourAverages connect_four={gambling.connect_four} />
 						</AccordionDetails>
 					</Accordion>
 				</AccordionDetails>
