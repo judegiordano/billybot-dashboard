@@ -171,7 +171,7 @@ const BuildConnectFourAverages = ({ connect_four }: { connect_four: IGamblingMet
 export const UserGamblingDropdown: React.FC<IUserGamblingDropdownProps> = ({
 	gambling
 }: IUserGamblingDropdownProps): JSX.Element => {
-	const { roulette, blackjack, connect_four } = gambling;
+	const { roulette, blackjack, connect_four, sports_betting } = gambling;
 	return (
 		<div className="pt-2 text-theme-gray">
 			<Accordion className="max-w-[400px]" style={{ backgroundColor: constants.THEME.DARK_BLACK }}>
@@ -246,6 +246,28 @@ export const UserGamblingDropdown: React.FC<IUserGamblingDropdownProps> = ({
 								))
 							}
 							<BuildConnectFourAverages connect_four={gambling.connect_four} />
+						</AccordionDetails>
+					</Accordion>
+					<Separator />
+					<Accordion className="max-w-[400px]" style={{ backgroundColor: constants.THEME.DARK_BLACK }}>
+						<AccordionSummary expandIcon={<ExpandMoreIcon className="text-theme-gray" />} >
+							<div className="text-theme-gray">
+								sports betting
+							</div>
+						</AccordionSummary>
+						<Separator />
+						<AccordionDetails>
+							{
+								Object.keys(sports_betting).map((key, index) => (
+									<div key={index} className="text-sm font-bold text-theme-gray">
+										{key.replace(/_/gmi, " ")}: <span
+											className={`text-theme-${/los/gmi.test(key) ? "red" : "green"}`}
+										>
+											{sports_betting[key as keyof typeof sports_betting]}
+										</span>
+									</div>
+								))
+							}
 						</AccordionDetails>
 					</Accordion>
 				</AccordionDetails>

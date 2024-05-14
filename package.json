@@ -16,7 +16,7 @@
     "@mui/lab": "^5.0.0-alpha.80",
     "@mui/material": "^5.6.0",
     "autoprefixer": "^10.4.4",
-    "btbot-types": "^1.8.1",
+    "btbot-types": "2.6.1",
     "cookie": "^0.5.0",
     "next": "12.1.4",
     "react": "17.0.2",
