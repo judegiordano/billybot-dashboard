@@ -38,39 +38,42 @@ export const ForgotPassword = () => {
 		<div className="max-w-[700px] min-h-screen pt-5 pb-5 m-auto px-5 mr-auto text-center">
 			<Card style={{ backgroundColor: constants.THEME.BLACK }}>
 				<CardContent>
-					<div className="pt-5">
-						<Input
-							fullWidth
-							className="text-theme-gray max-w-[250px]"
-							value={body.username}
-							onChange={({ target }) => setBody({ ...body, username: target.value.trim() })}
-							placeholder="username"
-						/>
-					</div>
-					<div className="pt-5">
-						<Input
-							type="email"
-							value={body.email}
-							onChange={({ target }) => setBody({ ...body, email: target.value.trim() })}
-							fullWidth
-							className="text-theme-gray max-w-[250px]"
-							placeholder="email"
-						/>
-					</div>
-					<div className="pt-5">
-						<Button
-							className="font-extrabold"
-							style={{
-								backgroundColor: formValid ? constants.THEME.PURPLE : "",
-								color: constants.THEME.WHITE
-							}}
-							disabled={!formValid || isLoading}
-							onClick={ResetPassword}
-							endIcon={<Spinner visible={isLoading} />}
-						>
+					<form>
+						<div className="pt-5">
+							<Input
+								fullWidth
+								className="text-theme-gray max-w-[250px]"
+								value={body.username}
+								onChange={({ target }) => setBody({ ...body, username: target.value.trim() })}
+								placeholder="username"
+							/>
+						</div>
+						<div className="pt-5">
+							<Input
+								type="email"
+								value={body.email}
+								onChange={({ target }) => setBody({ ...body, email: target.value.trim() })}
+								fullWidth
+								className="text-theme-gray max-w-[250px]"
+								placeholder="email"
+							/>
+						</div>
+						<div className="pt-5">
+							<Button
+								className="font-extrabold"
+								style={{
+									backgroundColor: formValid ? constants.THEME.PURPLE : "",
+									color: constants.THEME.WHITE
+								}}
+								disabled={!formValid || isLoading}
+								onClick={ResetPassword}
+								endIcon={<Spinner visible={isLoading} />}
+								type="submit"
+							>
 							Send Recovery Email
-						</Button>
-					</div>
+							</Button>
+						</div>
+					</form>
 					<div className="pt-5">
 						<AppLink href="/auth/login">LOGIN</AppLink>
 					</div>
