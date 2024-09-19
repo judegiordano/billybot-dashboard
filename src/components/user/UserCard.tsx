@@ -77,6 +77,11 @@ export const UserCard = ({ user }: IUserCardProps) => {
 							allowance available: <span className={`text-theme-${user.allowance_available ? "green" : "red"}`}>{user.allowance_available.toString()}</span>
 						</div>
 					</div>
+					<div className="pt-2 text-sm font-medium text-theme-gray font-content">
+						<div>
+							deal or no deal eligible: <span className={`text-theme-${user.is_deal_or_no_deal_eligible ? "green" : "red"}`}>{user.is_deal_or_no_deal_eligible.toString()}</span>
+						</div>
+					</div>
 				</div>
 			</CardContent>
 		</Card>
