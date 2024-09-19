@@ -41,39 +41,42 @@ export const Login = () => {
 		<div className="max-w-[700px] min-h-screen pt-5 pb-5 m-auto px-5 mr-auto text-center">
 			<Card style={{ backgroundColor: constants.THEME.BLACK }}>
 				<CardContent>
-					<div className="pt-5">
-						<Input
-							fullWidth
-							className="text-theme-gray max-w-[250px]"
-							value={body.username}
-							onChange={({ target }) => setBody({ ...body, username: target.value.trim() })}
-							placeholder="username"
-						/>
-					</div>
-					<div className="pt-5">
-						<Input
-							type="password"
-							value={body.password}
-							onChange={({ target }) => setBody({ ...body, password: target.value.trim() })}
-							fullWidth
-							className="text-theme-gray max-w-[250px]"
-							placeholder="password"
-						/>
-					</div>
-					<div className="pt-5">
-						<Button
-							className="font-extrabold"
-							style={{
-								backgroundColor: formValid ? constants.THEME.PURPLE : "",
-								color: constants.THEME.WHITE
-							}}
-							disabled={!formValid || isLoading}
-							onClick={login}
-							endIcon={<Spinner visible={isLoading} />}
-						>
+					<form>
+						<div className="pt-5">
+							<Input
+								fullWidth
+								className="text-theme-gray max-w-[250px]"
+								value={body.username}
+								onChange={({ target }) => setBody({ ...body, username: target.value.trim() })}
+								placeholder="username"
+							/>
+						</div>
+						<div className="pt-5">
+							<Input
+								type="password"
+								value={body.password}
+								onChange={({ target }) => setBody({ ...body, password: target.value.trim() })}
+								fullWidth
+								className="text-theme-gray max-w-[250px]"
+								placeholder="password"
+							/>
+						</div>
+						<div className="pt-5">
+							<Button
+								className="font-extrabold"
+								style={{
+									backgroundColor: formValid ? constants.THEME.PURPLE : "",
+									color: constants.THEME.WHITE
+								}}
+								disabled={!formValid || isLoading}
+								onClick={login}
+								endIcon={<Spinner visible={isLoading} />}
+								type="submit"
+							>
 							login
-						</Button>
-					</div>
+							</Button>
+						</div>
+					</form>
 					<div className="pt-5">
 						<AppLink href="/auth/register">SIGN UP</AppLink>
 					</div>
