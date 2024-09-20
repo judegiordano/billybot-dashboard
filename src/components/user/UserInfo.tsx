@@ -11,12 +11,10 @@ const buildBuckColor = (bucks: number) => {
 export const UserInfo = ({ user }: { user: IUser }) => {
 	return (
 		<>
-			<Tooltip title={`${user.username}#${user.discriminator}`}>
-				<div
-					className="inline-flex text-[20px] font-extrabold text-theme-gray">
-					{user.username}
-				</div>
-			</Tooltip>
+			<div
+				className="inline-flex text-[20px] font-extrabold text-theme-gray">
+				{user.username}
+			</div>
 			<Tooltip title={`${user.username} has ${user.billy_bucks} BillyBucks`}>
 				<div className={`inline-flex pl-1 text-[20px] font-medium ${buildBuckColor(user.billy_bucks)}`}>
 					{user.billy_bucks}
